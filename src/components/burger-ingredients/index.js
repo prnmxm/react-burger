@@ -1,2 +1,2 @@
-import BurgerIngredients from './burgerIngredients.tsx';
+import BurgerIngredients from './burgerIngredients.jsx';
 export { BurgerIngredients };
