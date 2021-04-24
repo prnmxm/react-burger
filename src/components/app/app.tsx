@@ -1,6 +1,6 @@
-import { AppHeader } from '../appHeader'
-import { BurgerConstructor } from '../burgerConstructor'
-import { BurgerIngredients } from '../burgerIngredients'
+import { AppHeader } from '../app-header'
+import { BurgerConstructor } from '../burger-constructor'
+import { BurgerIngredients } from '../burger-ingredients'
 
 function App () {
     return (
