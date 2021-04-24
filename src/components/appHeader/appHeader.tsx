@@ -15,7 +15,7 @@ function AppHeader () {
                         <ListIcon type="secondary" /> Лента заказов</a>
                         </li>
                 </ul>
-                <Logo />
+                <div className={style.logo}><Logo /></div>
                 <a href="#cabinet" className={`${style.button}`}>
                 <ProfileIcon type="secondary" /> Личный кабинет</a>
             </div>
