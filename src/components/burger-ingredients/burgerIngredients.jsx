@@ -20,12 +20,13 @@ function BurgerIngredients ({items}) {
             }
             sortToArray.push(data)
     }
+    const category = sortToArray.map(e => e.category);
 
     return (
-        <div className={`pt-5 ${style.container}`}>
+        <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
             <div className={`mb-5`}>
-                <Tab items={sortToArray.map(e => e.category)}/>
+                <Tab items={category}/>
             </div>
             <Ingredients items={sortToArray}/>
         </div> 

@@ -11,7 +11,7 @@ export default function IngredientMain ({item}) {
                 <img src={item.image} alt={item.name}/>
             </picture>
             <Counter count={1} size="small" />
-            <span className={`text text_type_main-small ${style.price}`}>{item.price} <CurrencyIcon type="primary" /></span>
+            <span className={`text text_type_digits-small ${style.price}`}>{item.price} <CurrencyIcon type="primary" /></span>
             <p className={`text text_type_main-default ${style.title}`}>{item.name}</p>
         </div>
     )

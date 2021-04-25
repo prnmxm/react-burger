@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-top: 60px;
+    width: 100%;
+    padding-left: 60px;
+}
+.footer {
+    margin-top: 40px;
+    display: flex;
+    padding-right: 22px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.price {
+    font-size: 40px;
+    margin-right: 40px;
+}
