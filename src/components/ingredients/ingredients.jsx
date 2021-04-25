@@ -1,7 +1,6 @@
 import { IngredientCategory } from '../ingredient-category'
 import style from './ingredients.module.scss'
 export default function Ingredients ({items}) {
-    console.log(1);
     return (
         <div className={style.container}>
            { 
