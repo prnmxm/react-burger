@@ -6,7 +6,7 @@ export default function IngredientSelected ({item, styleClass}) {
         <div className={`${style.item} ${styleClass ? style[styleClass] : ''}`}>
             {
                 !styleClass &&
-                <div className={style.absolute}><DragIcon type="primary" /></div>
+                <div className={style.dragdrop}><DragIcon type="primary" /></div>
             }
             <img src={item.image_mobile} className={style.image} alt={item.name}/>
             <p className={`text text_type_main-default ${style.text}`}>{item.name}</p>
@@ -15,7 +15,7 @@ export default function IngredientSelected ({item, styleClass}) {
                 styleClass ?
                 <LockIcon type="secondary" />
                 :
-                <CloseIcon type="primary" />
+                <div className={style.remove}><CloseIcon type="primary" /></div>
             }
         </div>
     )

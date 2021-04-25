@@ -39,9 +39,13 @@
         margin-left: 9px;
     }
 }
-.absolute {
+.dragdrop {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: -30px;
+    cursor: pointer;
+}
+.remove {
+    cursor: pointer;
 }
