@@ -2,3 +2,7 @@
 body {
     background-color: #131316;
 }
+#root {
+    height: 100vh;
+    padding-bottom: 20px;
+}
