@@ -25,7 +25,7 @@ function BurgerIngredients ({items}) {
         <div className={`pt-5 ${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
             <div className={`mb-5`}>
-                <Tab items={sortToArray.map(e => e.name)}/>
+                <Tab items={sortToArray.map(e => e.category)}/>
             </div>
             <Ingredients items={sortToArray}/>
         </div> 
