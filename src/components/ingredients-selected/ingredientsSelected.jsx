@@ -5,13 +5,13 @@ export default function IngredientsSelected ({items}) {
     const itemsOther = items.filter( e => e.type !== 'bun');
     return (
         <div className={style.container}>
-            <IngredientSelected item={itemBun} styleClass={'first'}/>
+            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'}/>
             <div className={style.containerScroll}> 
                 {itemsOther.map( e => (
                     <IngredientSelected item={e} key={e._id}/>
                 ))}
             </div>
-             <IngredientSelected item={itemBun} styleClass={`last`}/>
+             <IngredientSelected item={{...itemBun, name: itemBun.name + ' (низ)'}} styleClass={`last`}/>
         </div>
     )
 } 
