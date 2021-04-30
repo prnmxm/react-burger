@@ -1,2 +1,2 @@
-import IngredientsSelected from './ingredientsSelected';
+import IngredientsSelected from './ingredients-selected';
 export {IngredientsSelected}

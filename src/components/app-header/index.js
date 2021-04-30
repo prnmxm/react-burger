@@ -1,2 +1,2 @@
-import AppHeader from './appHeader.jsx';
+import AppHeader from './app-header.jsx';
 export { AppHeader };

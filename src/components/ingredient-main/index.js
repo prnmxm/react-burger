@@ -1,2 +1,2 @@
-import IngredientMain from './ingredientMain';
+import IngredientMain from './ingredient-main';
 export { IngredientMain }

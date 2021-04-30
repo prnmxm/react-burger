@@ -1,2 +1,2 @@
-import BurgerConstructor from './burgerConstructor.jsx';
+import BurgerConstructor from './burger-constructor.jsx';
 export { BurgerConstructor };
