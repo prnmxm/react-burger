@@ -1,4 +1,4 @@
-import style from './ingredientsSelected.module.scss'
+import style from './ingredients-selected.module.scss'
 import {IngredientSelected} from '../ingredient-selected'
 export default function IngredientsSelected ({items}) {
     const itemBun = items.find( e => e.type === 'bun');

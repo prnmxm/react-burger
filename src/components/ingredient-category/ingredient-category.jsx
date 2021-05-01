@@ -1,5 +1,5 @@
 import { IngredientMain } from '../ingredient-main'
-import style from './ingredientCategory.module.scss'
+import style from './ingredient-category.module.scss'
 
 export default function IngredientCategory ({items}) {
     return (

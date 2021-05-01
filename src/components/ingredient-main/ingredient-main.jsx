@@ -1,5 +1,5 @@
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
-import style from './ingredientMain.module.scss'
+import style from './ingredient-main.module.scss'
 
 export default function IngredientMain ({item}) {
     return (

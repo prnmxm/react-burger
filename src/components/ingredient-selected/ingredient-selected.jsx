@@ -1,5 +1,5 @@
 import { CurrencyIcon, LockIcon, DragIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import style from './ingredientSelected.module.scss'
+import style from './ingredient-selected.module.scss'
 
 export default function IngredientSelected ({item, styleClass}) {
     return (

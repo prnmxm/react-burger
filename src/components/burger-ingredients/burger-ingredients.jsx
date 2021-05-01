@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import {Tab} from '../tab'
-import style from './burgerIngredients.module.scss';
+import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { checkCategory } from '../../utils/checkCategory'
 

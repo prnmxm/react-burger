@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {IngredientsSelected} from '../ingredients-selected'
-import style from './burgerConstructor.module.scss';
+import style from './burger-constructor.module.scss';
 function BurgerConstructor ({items}) {
     return (
         <div className={style.container}>
