@@ -1,7 +1,10 @@
 .container {
     display: flex;
+    max-width: calc(100% - 20px);
     div {
-        max-width: 200px;
         width: 100%;
+        @media screen {
+            
+        }
     }
 }
