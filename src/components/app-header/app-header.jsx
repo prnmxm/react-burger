@@ -16,7 +16,7 @@ function AppHeader () {
                         </li>
                 </ul>
                 <a href="/" className={style.logo}><Logo /></a>
-                <a href="/" className={`pb-1 pt-1 ${style.button}`}>
+                <a href="/" className={`pb-1 pt-1 text text_type_main-default ${style.button}`}>
                 <ProfileIcon type="secondary" /> Личный кабинет</a>
             </div>
         </header>
