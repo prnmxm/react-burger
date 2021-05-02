@@ -15,3 +15,4 @@ export const category = [
         title: 'Соусы'
     }
 ]
+export const apiUrl = 'https://norma.nomoreparties.space/api/ingredients';

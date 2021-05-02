@@ -1,6 +1,6 @@
-import { CurrencyIcon, LockIcon, DragIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, LockIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-selected.module.scss'
-
+import { DeleteIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/delete-icon";
 export default function IngredientSelected ({item, styleClass}) {
     return (
         <div className={`${style.item} ${styleClass ? style[styleClass] : ''}`}>
@@ -15,7 +15,7 @@ export default function IngredientSelected ({item, styleClass}) {
                 styleClass ?
                 <LockIcon type="secondary" />
                 :
-                <div className={style.remove}><CloseIcon type="primary" /></div>
+                <div className={style.remove}><DeleteIcon type="primary" /></div>
             }
         </div>
     )
