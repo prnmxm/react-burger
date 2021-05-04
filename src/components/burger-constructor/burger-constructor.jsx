@@ -1,13 +1,18 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {IngredientsSelected} from '../ingredients-selected'
 import style from './burger-constructor.module.scss';
 function BurgerConstructor ({items}) {
+    const price = React.useMemo(()=>items.reduce((acc,cur) => {
+        return acc+cur.price
+    },0),[items])
     return (
         <div className={style.container}>
-            <IngredientsSelected items={items}/>
+            {items.length !== 0 &&
+            <IngredientsSelected items={items}/>}
             <div className={style.footer}>
-                <span className={`text text_type_digits-large ${style.price}`}>610 <CurrencyIcon type="primary" /></span>
+                <span className={`text text_type_digits-large ${style.price}`}>{price} <CurrencyIcon type="primary" /></span>
                 <Button type="primary" size="large">
                     Оформить заказ
                 </Button>

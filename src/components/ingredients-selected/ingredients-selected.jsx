@@ -1,8 +1,13 @@
+import React from 'react'
 import style from './ingredients-selected.module.scss'
 import {IngredientSelected} from '../ingredient-selected'
 export default function IngredientsSelected ({items}) {
-    const itemBun = items.find( e => e.type === 'bun');
-    const itemsOther = items.filter( e => e.type !== 'bun');
+    const [itemBun, itemsOther] = React.useMemo(()=>{
+        const itemBun = items.find( e => e.type === 'bun');
+        const itemsOther = items.filter( e => e.type !== 'bun');
+        return [itemBun, itemsOther]
+    }, [items])
+
     return (
         <div className={style.container}>
             <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'}/>

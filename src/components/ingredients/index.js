@@ -1,2 +1,3 @@
 import Ingredients from './ingredients';
-export { Ingredients }
+
+export { Ingredients };

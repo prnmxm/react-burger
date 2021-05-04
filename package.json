@@ -24,12 +24,6 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
   "browserslist": {
     "production": [
       ">0.2%",
@@ -43,8 +37,8 @@
     ]
   },
   "devDependencies": {
-    "postcss-normalize": "^9.0.0",
+    "css-loader": "^5.2.4",
     "node-sass": "^5.0.0",
-    "css-loader": "^5.2.4"
+    "postcss-normalize": "^9.0.0"
   }
 }

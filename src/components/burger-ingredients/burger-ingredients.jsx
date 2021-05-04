@@ -1,3 +1,4 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
@@ -5,23 +6,28 @@ import { Ingredients } from '../ingredients'
 import { checkCategory } from '../../utils/checkCategory'
 
 function BurgerIngredients ({items}) {
-    const sort = items.reduce( (acc, cur) => {
-        const data = acc;
-        if(!data[cur.type]) {
-            data[cur.type] = [];
-        } 
-        data[cur.type].push(cur)
-        return data;
-    }, {})
-    const sortToArray = [];
-    for (const item in sort) {
+    const sort = React.useMemo(() => {
+        return items.reduce( (acc, cur) => {
+            const data = acc;
+            if(!data[cur.type]) {
+                data[cur.type] = [];
+            } 
+            data[cur.type].push(cur)
+            return data;
+        }, {})
+    }, [items])
+    const sortToArray = React.useMemo(() => {
+        const arr =[];
+        for (const item in sort) {
             const data = {
                 category: checkCategory(item) ,
                 items: sort[item]
             }
-            sortToArray.push(data)
-    }
-    const category = sortToArray.map(e => e.category);
+            arr.push(data)
+        }
+        return arr
+    }, [sort])
+    const category = React.useMemo(()=> sortToArray.map(e => e.category), [sortToArray]);
 
     return (
         <div className={`${style.container}`}>
