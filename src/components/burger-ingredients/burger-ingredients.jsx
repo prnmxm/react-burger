@@ -3,9 +3,16 @@ import PropTypes from 'prop-types'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
-import { checkCategory } from '../../utils/checkCategory'
+import { category } from '../../utils/constants';
 
 function BurgerIngredients ({items}) {
+    const checkCategory = (text) => {
+        const item = category.find((e) => e.name === text);
+        if (item) {
+          return item.title;
+        }
+        throw new Error('No category');
+    }
     const sort = React.useMemo(() => {
         return items.reduce( (acc, cur) => {
             const data = acc;
@@ -26,14 +33,14 @@ function BurgerIngredients ({items}) {
             arr.push(data)
         }
         return arr
-    }, [sort])
-    const category = React.useMemo(()=> sortToArray.map(e => e.category), [sortToArray]);
+    }, [items])
+    const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
 
     return (
         <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
             <div className={`mb-5`}>
-                <Tab items={category}/>
+                <Tab items={categoryList}/>
             </div>
             <Ingredients items={sortToArray}/>
         </div> 
