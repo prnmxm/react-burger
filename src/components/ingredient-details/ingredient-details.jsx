@@ -3,8 +3,8 @@ function IngredientDetails(props) {
     return (
         <div className={style.order}>
             <img src={props.image}/>
-            <h3 >{props.name}</h3>
-            <p className="text text_type_main-default">{props.desc}</p>
+            <h3 className={style.title}>{props.name}</h3>
+            <p className={style.desc + ' ' + "text text_type_main-default"}>{props.desc}</p>
             <div className={style.info}>
                 <div className={style.infoItem}>
                     <span className='text text_type_main-small text_color_inactive'>
