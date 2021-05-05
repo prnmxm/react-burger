@@ -1,4 +1,6 @@
 import style from './ingredient-details.module.scss'
+import PropTypes from 'prop-types'
+
 function IngredientDetails(props) {
     return (
         <div className={style.order}>
@@ -41,5 +43,13 @@ function IngredientDetails(props) {
             </div>
         </div>
     )
+}
+IngredientDetails.propTypes = {
+    image: PropTypes.string,
+    calories: PropTypes.number,
+    carbohydrates: PropTypes.number,
+    fats: PropTypes.number,
+    desc: PropTypes.string,
+    proteins: PropTypes.number,
 }
 export default IngredientDetails;

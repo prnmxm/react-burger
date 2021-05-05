@@ -35,10 +35,11 @@ function BurgerIngredients ({items, setModal}) {
         return arr
     }, [items])
     const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
-    const showItem = (event) => {
-        const id = event.target.closest('[data-id]').dataset.id;
+    const showItem = React.useCallback((event) => {
+        const target = event.target.closest('[data-id]');
+        if(!target) return;
+        const id = target.dataset.id
         const item = items.find(e=> e._id === id);
-        console.log(item);
         setModal({
             isShow: true,
             title: 'Детали ингредиента',
@@ -52,7 +53,7 @@ function BurgerIngredients ({items, setModal}) {
             carbohydrates={123}
             />
         })
-    }
+    },[])
     return (
         <div className={`${style.container}`} onClick={showItem}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>

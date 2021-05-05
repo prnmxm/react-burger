@@ -46,7 +46,7 @@ function App () {
             <AppHeader /> 
             {data.load && <main className={`pt-5 ${style.container}`}>
                 <BurgerIngredients items={data.main} setModal={setModalData}/> 
-                <BurgerConstructor items={data.selected}/> 
+                <BurgerConstructor items={data.selected} setModal={setModalData}/> 
             </main>}
             {modalData.isShow && <Modal title={modalData.title && modalData.title} setModal={setModalData}>{modalData.content}</Modal>}
         </>

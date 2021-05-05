@@ -1,6 +1,7 @@
 import React from 'react';
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './tab.module.scss';
+import PropTypes from 'prop-types'
 
 export default function TabSection ({items}) {
   const [current, setCurrent] = React.useState(items[0])
@@ -21,3 +22,6 @@ export default function TabSection ({items}) {
       </div>
     )
   }
+TabSection.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.string)
+}
