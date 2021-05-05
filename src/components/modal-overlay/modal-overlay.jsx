@@ -1,7 +1,7 @@
 import style from './modal-overlay.module.scss' 
-function ModalOverlay() {
+function ModalOverlay(props) {
     return (
-        <div className={style.overlay}></div>
+        <div className={style.overlay} onClick={props.close}></div>
     )
 }
 export default ModalOverlay;

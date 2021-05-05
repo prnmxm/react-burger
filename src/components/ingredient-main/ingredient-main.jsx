@@ -3,7 +3,7 @@ import style from './ingredient-main.module.scss'
 
 export default function IngredientMain ({item}) {
     return (
-        <div className={`${style.block} mb-5`} onClick={e => console.log(item)}>
+        <div className={`${style.block} mb-5`} data-id={item._id}>
             <picture className={style.image}>
                 <source srcSet={item.image} media="(min-width: 1200px)"/>
                 <source srcSet={item.image_large} media="(min-width: 640px)"/>

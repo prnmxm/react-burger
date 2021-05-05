@@ -4,8 +4,8 @@ import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { category } from '../../utils/constants';
-
-function BurgerIngredients ({items}) {
+import { IngredientDetails } from '../ingredient-details'
+function BurgerIngredients ({items, setModal}) {
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);
         if (item) {
@@ -35,9 +35,26 @@ function BurgerIngredients ({items}) {
         return arr
     }, [items])
     const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
-
+    const showItem = (event) => {
+        const id = event.target.closest('[data-id]').dataset.id;
+        const item = items.find(e=> e._id === id);
+        console.log(item);
+        setModal({
+            isShow: true,
+            title: 'Детали ингредиента',
+            content: <IngredientDetails 
+            image={item.image} 
+            name={item.name} 
+            desc={'Превосходное описание'} 
+            calories={123} 
+            proteins={123} 
+            fats={123}
+            carbohydrates={123}
+            />
+        })
+    }
     return (
-        <div className={`${style.container}`}>
+        <div className={`${style.container}`} onClick={showItem}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
             <div className={`mb-5`}>
                 <Tab items={categoryList}/>

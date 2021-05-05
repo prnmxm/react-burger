@@ -4,6 +4,7 @@ import { BurgerIngredients } from '../burger-ingredients'
 import React from 'react';
 import style from './app.module.scss';
 import { apiUrl } from '../../utils/constants';
+import { Modal } from '../modal';
 
 
 function App () {
@@ -11,6 +12,11 @@ function App () {
         main: [],
         selected: [],
         load: false
+    });
+    const [modalData, setModalData] = React.useState({
+        isShow: false,
+        title: null,
+        content: null
     });
     React.useEffect(() => {
         setData((prev) => ({
@@ -39,9 +45,10 @@ function App () {
         <>
             <AppHeader /> 
             {data.load && <main className={`pt-5 ${style.container}`}>
-                <BurgerIngredients items={data.main}/> 
+                <BurgerIngredients items={data.main} setModal={setModalData}/> 
                 <BurgerConstructor items={data.selected}/> 
             </main>}
+            {modalData.isShow && <Modal title={modalData.title && modalData.title} setModal={setModalData}>{modalData.content}</Modal>}
         </>
     )
 }
