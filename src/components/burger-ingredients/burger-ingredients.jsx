@@ -11,7 +11,6 @@ function BurgerIngredients ({items, setModal}) {
         if (item) {
           return item.title;
         }
-        throw new Error('No category');
     }
     const sort = React.useMemo(() => {
         return items.reduce( (acc, cur) => {

@@ -7,15 +7,21 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types'
 
 function Modal(props) {
-    function clear () {
+    function clear (e) {
+        if(e.keyCode === 27) {
+            props.setModal({
+                isShow: false,
+                title: null,
+                content: null,
+            }) 
+        }
+    }
+    const close = React.useCallback(() => {
         props.setModal({
             isShow: false,
             title: null,
             content: null,
         }) 
-    }
-    const close = React.useCallback(() => {
-        clear();
     },[])
     React.useEffect(()=> {
         window.addEventListener('keydown', clear)
