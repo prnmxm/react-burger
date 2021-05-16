@@ -1,2 +1,3 @@
 import Tab from './tab';
-export { Tab } 
+
+export { Tab };

@@ -1,5 +1,7 @@
-import { CurrencyIcon, LockIcon, DragIcon, CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
+import { CurrencyIcon, LockIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-selected.module.scss'
+import { DeleteIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/delete-icon";
+import PropTypes from 'prop-types'
 
 export default function IngredientSelected ({item, styleClass}) {
     return (
@@ -15,8 +17,25 @@ export default function IngredientSelected ({item, styleClass}) {
                 styleClass ?
                 <LockIcon type="secondary" />
                 :
-                <div className={style.remove}><CloseIcon type="primary" /></div>
+                <div className={style.remove}><DeleteIcon type="primary" /></div>
             }
         </div>
     )
 } 
+IngredientSelected.propTypes = {
+    item: PropTypes.shape({
+        _id: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
+        proteins: PropTypes.number.isRequired,
+        fat: PropTypes.number.isRequired,
+        carbohydrates: PropTypes.number.isRequired,
+        calories: PropTypes.number.isRequired,
+        price: PropTypes.number.isRequired,
+        image: PropTypes.string.isRequired,
+        image_mobile: PropTypes.string.isRequired,
+        image_large: PropTypes.string.isRequired,
+        __v: PropTypes.number,
+    }).isRequired,
+    styleClass: PropTypes.string
+}

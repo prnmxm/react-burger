@@ -1,14 +1,26 @@
+import React from 'react'
 import PropTypes from 'prop-types'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {IngredientsSelected} from '../ingredients-selected'
 import style from './burger-constructor.module.scss';
-function BurgerConstructor ({items}) {
+import {OrderDetails} from '../order-details'
+function BurgerConstructor ({items, setModal}) {
+    const price = React.useMemo(()=>items.reduce((acc,cur) => {
+        return acc+cur.price
+    },0),[items])
+    function click() {
+        setModal({
+            isShow: true,
+            content: <OrderDetails/>
+        })
+    }
     return (
         <div className={style.container}>
-            <IngredientsSelected items={items}/>
+            {items.length !== 0 &&
+            <IngredientsSelected items={items}/>}
             <div className={style.footer}>
-                <span className={`text text_type_digits-large ${style.price}`}>610 <CurrencyIcon type="primary" /></span>
-                <Button type="primary" size="large">
+                <span className={`text text_type_digits-large ${style.price}`}>{price} <CurrencyIcon type="primary" /></span>
+                <Button type="primary" size="large" onClick={click}> 
                     Оформить заказ
                 </Button>
             </div>
@@ -30,6 +42,7 @@ BurgerConstructor.propTypes = {
         image_large: PropTypes.string.isRequired,
         __v: PropTypes.number,
     })).isRequired,
+    setModal: PropTypes.func
 }
 
 export default BurgerConstructor;

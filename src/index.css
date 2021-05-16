@@ -1,4 +1,5 @@
 @import "normalize.css/opinionated.css";
+@import "./fonts/fonts.css";
 body {
     background-color: #131316;
 }

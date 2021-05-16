@@ -11,7 +11,7 @@
     "@types/node": "^12.20.10",
     "@types/react": "^17.0.3",
     "@types/react-dom": "^17.0.3",
-    "@ya.praktikum/react-developer-burger-ui-components": "^1.4.2",
+    "@ya.praktikum/react-developer-burger-ui-components": "^1.5.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
@@ -23,12 +23,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [
@@ -43,8 +37,8 @@
     ]
   },
   "devDependencies": {
-    "postcss-normalize": "^9.0.0",
+    "css-loader": "^5.2.4",
     "node-sass": "^5.0.0",
-    "css-loader": "^5.2.4"
+    "postcss-normalize": "^9.0.0"
   }
 }
