@@ -11,7 +11,7 @@ function BurgerConstructor () {
     const {data: {main: selected}} = useContext(IngredientsContext)
     const items = selected.filter( e => e.selected);
     const price = React.useMemo(()=>items.reduce((acc,cur) => {
-        return acc+cur.price
+        return acc + cur.price * cur.count;
     },0),[items])
     function click(e) {
         fetch('https://norma.nomoreparties.space/api/orders', {
