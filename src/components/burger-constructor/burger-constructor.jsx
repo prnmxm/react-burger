@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {IngredientsSelected} from '../ingredients-selected'
@@ -8,7 +8,7 @@ import { IngredientsContext } from '../../services/IngredientsContext';
 import { ModalContext } from '../../services/ModalContext';
 
 function BurgerConstructor () {
-    const {selected: items} = React.useContext(IngredientsContext)
+    const {data: {selected:items}} = useContext(IngredientsContext)
     const setModal = React.useContext(ModalContext)
     const price = React.useMemo(()=>items.reduce((acc,cur) => {
         return acc+cur.price

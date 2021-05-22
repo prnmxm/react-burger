@@ -64,9 +64,9 @@ function App () {
             <AppHeader /> 
             <ModalContext.Provider value={setModalData}>
                 {data.load && <main className={`pt-5 ${style.container}`}>
-                    <IngredientsContext.Provider value={data}>
-                        <BurgerIngredients setModal={setModalData}/> 
-                        <BurgerConstructor setModal={setModalData}/> 
+                    <IngredientsContext.Provider value={{data, setData}}>
+                        <BurgerIngredients/> 
+                        <BurgerConstructor/> 
                     </IngredientsContext.Provider>
                 </main>}
                 {modalData.isShow && <Modal title={modalData.title && modalData.title}>{modalData.content}</Modal>}

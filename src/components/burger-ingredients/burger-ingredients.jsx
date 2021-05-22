@@ -9,7 +9,7 @@ import { IngredientsContext } from '../../services/IngredientsContext';
 import { ModalContext } from '../../services/ModalContext';
 
 function BurgerIngredients () {
-    const {main: items} = useContext(IngredientsContext)
+    const {data: {main:items}} = useContext(IngredientsContext)
     const setModal = useContext(ModalContext)
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);
