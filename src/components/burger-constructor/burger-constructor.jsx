@@ -14,9 +14,26 @@ function BurgerConstructor () {
         return acc+cur.price
     },0),[items])
     function click(e) {
-        setModal({
-            isShow: true,
-            content: <OrderDetails/>
+        fetch('https://norma.nomoreparties.space/api/orders', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                ingredients: items.map( e => e._id)
+            })
+        })
+        .then(e => {
+            if(e.ok) {
+                return e.json();
+              }
+            return Promise.reject(e)
+        })
+        .then(e => {
+            setModal({
+                isShow: true,
+                content: <OrderDetails number={e.order.number}/>
+            })
         })
     }
     return (

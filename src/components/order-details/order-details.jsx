@@ -1,9 +1,10 @@
 import done from '../../images/done.png'
+import PropTypes from 'prop-types'
 import style from './order-details.module.scss';
-function OrderDetails() {
+function OrderDetails(props) {
     return (
         <div className={style.order}>
-            <p className="text text_type_digits-medium mb-4">034536</p>
+            <p className="text text_type_digits-medium mb-4">{props.number}</p>
             <p className="text text_type_main-default mb-4">
                 идентификатор заказа
             </p>
@@ -16,5 +17,8 @@ function OrderDetails() {
             </p>
         </div>
     )
+}
+OrderDetails.prototype ={
+    number: PropTypes.number.isRequired
 }
 export default OrderDetails;

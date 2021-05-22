@@ -1,5 +1,4 @@
 import React, {useContext} from 'react'
-import PropTypes from 'prop-types'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
@@ -44,7 +43,6 @@ function BurgerIngredients () {
         if(!target) return;
         const id = target.dataset.id
         const item = items.find(e=> e._id === id);
-        console.log(item);
         setModal({
             isShow: true,
             title: 'Детали ингредиента',
