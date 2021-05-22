@@ -9,6 +9,7 @@ import { ModalContext } from '../../services/ModalContext';
 
 function BurgerConstructor () {
     const {data: {main: selected}} = useContext(IngredientsContext)
+    const setModal = React.useContext(ModalContext)
     const items = selected.filter( e => e.selected);
     const price = React.useMemo(()=>items.reduce((acc,cur) => {
         return acc + cur.price * cur.count;
