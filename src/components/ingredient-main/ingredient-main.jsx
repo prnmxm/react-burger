@@ -1,10 +1,43 @@
+import React, {useContext} from 'react'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-main.module.scss'
 import PropTypes from 'prop-types'
+import { ModalContext } from '../../services/ModalContext';
+import { IngredientDetails } from '../ingredient-details'
+import { IngredientsContext } from '../../services/IngredientsContext';
 
 export default function IngredientMain ({item}) {
+    const setModal = useContext(ModalContext)
+    const {setData} = useContext(IngredientsContext)
+    const showItem = React.useCallback((event) => {
+        setModal({
+            isShow: true,
+            title: 'Детали ингредиента',
+            content: <IngredientDetails 
+            image={item.image} 
+            name={item.name} 
+            desc={'Превосходное описание'} 
+            calories={item.calories} 
+            proteins={item.proteins} 
+            fats={item.fat}
+            carbohydrates={item.carbohydrates}
+            />
+        })
+    },[])
+    const selectItem = (e) => {
+        setData({
+            type: 'add',
+            payload: {
+                id: item._id,
+                type: item.type
+            }
+        })
+    }
     return (
-        <div className={`${style.block} mb-5`} data-id={item._id}>
+        <div className={`${style.block} mb-5`} onClick={()=>{
+            showItem();
+            selectItem()
+        }}>
             <picture className={style.image}>
                 <source srcSet={item.image} media="(min-width: 1200px)"/>
                 <source srcSet={item.image_large} media="(min-width: 640px)"/>

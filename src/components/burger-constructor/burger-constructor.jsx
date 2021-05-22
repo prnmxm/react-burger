@@ -8,8 +8,8 @@ import { IngredientsContext } from '../../services/IngredientsContext';
 import { ModalContext } from '../../services/ModalContext';
 
 function BurgerConstructor () {
-    const {data: {selected:items}} = useContext(IngredientsContext)
-    const setModal = React.useContext(ModalContext)
+    const {data: {main: selected}} = useContext(IngredientsContext)
+    const items = selected.filter( e => e.selected);
     const price = React.useMemo(()=>items.reduce((acc,cur) => {
         return acc+cur.price
     },0),[items])
@@ -39,13 +39,17 @@ function BurgerConstructor () {
     return (
         <div className={style.container}>
             {items.length !== 0 &&
-            <IngredientsSelected items={items}/>}
-            <div className={style.footer}>
-                <span className={`text text_type_digits-large ${style.price}`}>{price} <CurrencyIcon type="primary" /></span>
-                <Button type="primary" size="large" onClick={click}> 
-                    Оформить заказ
-                </Button>
-            </div>
+                <>
+                    <IngredientsSelected items={items}/>
+                    <div className={style.footer}>
+                        <span className={`text text_type_digits-large ${style.price}`}>{price} 
+                        <CurrencyIcon type="primary" /></span>
+                        <Button type="primary" size="large" onClick={click}> 
+                            Оформить заказ
+                        </Button>
+                    </div>
+                </>
+            }
         </div> 
     )
 }

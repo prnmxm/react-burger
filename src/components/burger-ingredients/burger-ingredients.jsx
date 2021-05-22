@@ -3,13 +3,10 @@ import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { category } from '../../utils/constants';
-import { IngredientDetails } from '../ingredient-details'
 import { IngredientsContext } from '../../services/IngredientsContext';
-import { ModalContext } from '../../services/ModalContext';
 
 function BurgerIngredients () {
     const {data: {main:items}} = useContext(IngredientsContext)
-    const setModal = useContext(ModalContext)
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);
         if (item) {
@@ -38,27 +35,10 @@ function BurgerIngredients () {
         return arr
     }, [items])
     const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
-    const showItem = React.useCallback((event) => {
-        const target = event.target.closest('[data-id]');
-        if(!target) return;
-        const id = target.dataset.id
-        const item = items.find(e=> e._id === id);
-        setModal({
-            isShow: true,
-            title: 'Детали ингредиента',
-            content: <IngredientDetails 
-            image={item.image} 
-            name={item.name} 
-            desc={'Превосходное описание'} 
-            calories={item.calories} 
-            proteins={item.proteins} 
-            fats={item.fat}
-            carbohydrates={item.carbohydrates}
-            />
-        })
-    },[])
+  
+
     return (
-        <div className={`${style.container}`} onClick={showItem}>
+        <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
             <div className={`mb-5`}>
                 <Tab items={categoryList}/>
