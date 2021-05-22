@@ -38,11 +38,17 @@ function App () {
             return Promise.reject(e)
         })
         .then((e)=> {
+            const modData = e.data.map( e => {
+                return {
+                    ...e,
+                    count: 0
+                }
+            })
             setData({
                 type: 'init',
                 payload: {
-                    main: e.data,
-                    selected: e.data.slice(0,8),
+                    main: modData,
+                    selected: modData.slice(0,8),
                     load: true
                 }
             })

@@ -3,6 +3,7 @@ import style from './ingredient-main.module.scss'
 import PropTypes from 'prop-types'
 
 export default function IngredientMain ({item}) {
+    console.log(item);
     return (
         <div className={`${style.block} mb-5`} data-id={item._id}>
             <picture className={style.image}>
@@ -11,7 +12,7 @@ export default function IngredientMain ({item}) {
                 <source srcSet={item.image_mobile} media="(max-width: 639px)"/>
                 <img src={item.image} alt={item.name}/>
             </picture>
-            <Counter count={1} size="small" />
+            {item.count !== 0 && <Counter count={item.count} size="small" />}
             <span className={`text text_type_digits-small ${style.price}`}>{item.price} <CurrencyIcon type="primary" /></span>
             <p className={`text text_type_main-default ${style.title}`}>{item.name}</p>
         </div>
