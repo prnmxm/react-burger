@@ -1,11 +1,16 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import PropTypes from 'prop-types'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { category } from '../../utils/constants';
 import { IngredientDetails } from '../ingredient-details'
-function BurgerIngredients ({items, setModal}) {
+import { IngredientsContext } from '../../services/IngredientsContext';
+import { ModalContext } from '../../services/ModalContext';
+
+function BurgerIngredients () {
+    const {main: items} = useContext(IngredientsContext)
+    const setModal = useContext(ModalContext)
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);
         if (item) {
@@ -39,6 +44,7 @@ function BurgerIngredients ({items, setModal}) {
         if(!target) return;
         const id = target.dataset.id
         const item = items.find(e=> e._id === id);
+        console.log(item);
         setModal({
             isShow: true,
             title: 'Детали ингредиента',
@@ -46,10 +52,10 @@ function BurgerIngredients ({items, setModal}) {
             image={item.image} 
             name={item.name} 
             desc={'Превосходное описание'} 
-            calories={123} 
-            proteins={123} 
-            fats={123}
-            carbohydrates={123}
+            calories={item.calories} 
+            proteins={item.proteins} 
+            fats={item.fat}
+            carbohydrates={item.carbohydrates}
             />
         })
     },[])
@@ -63,20 +69,5 @@ function BurgerIngredients ({items, setModal}) {
         </div> 
     )
 }
-BurgerIngredients.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        calories: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        __v: PropTypes.number,
-    })).isRequired,
-}
+
 export default BurgerIngredients;

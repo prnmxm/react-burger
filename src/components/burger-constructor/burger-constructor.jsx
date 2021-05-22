@@ -4,11 +4,16 @@ import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-co
 import {IngredientsSelected} from '../ingredients-selected'
 import style from './burger-constructor.module.scss';
 import {OrderDetails} from '../order-details'
-function BurgerConstructor ({items, setModal}) {
+import { IngredientsContext } from '../../services/IngredientsContext';
+import { ModalContext } from '../../services/ModalContext';
+
+function BurgerConstructor () {
+    const {selected: items} = React.useContext(IngredientsContext)
+    const setModal = React.useContext(ModalContext)
     const price = React.useMemo(()=>items.reduce((acc,cur) => {
         return acc+cur.price
     },0),[items])
-    function click() {
+    function click(e) {
         setModal({
             isShow: true,
             content: <OrderDetails/>
@@ -26,23 +31,6 @@ function BurgerConstructor ({items, setModal}) {
             </div>
         </div> 
     )
-}
-BurgerConstructor.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        calories: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        __v: PropTypes.number,
-    })).isRequired,
-    setModal: PropTypes.func
 }
 
 export default BurgerConstructor;

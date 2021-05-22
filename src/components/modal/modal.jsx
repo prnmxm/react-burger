@@ -5,11 +5,13 @@ import style from './modal.module.scss'
 import {ModalOverlay} from '../modal-overlay'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import PropTypes from 'prop-types'
+import { ModalContext } from '../../services/ModalContext';
 
 function Modal(props) {
+    const setModal = React.useContext(ModalContext)
     function clear (e) {
         if(e.keyCode === 27) {
-            props.setModal({
+            setModal({
                 isShow: false,
                 title: null,
                 content: null,
@@ -17,7 +19,7 @@ function Modal(props) {
         }
     }
     const close = React.useCallback(() => {
-        props.setModal({
+        setModal({
             isShow: false,
             title: null,
             content: null,
