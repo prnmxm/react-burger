@@ -3,7 +3,6 @@ import style from './ingredient-main.module.scss'
 import PropTypes from 'prop-types'
 
 export default function IngredientMain ({item}) {
-    console.log(item);
     return (
         <div className={`${style.block} mb-5`} data-id={item._id}>
             <picture className={style.image}>
