@@ -6,15 +6,23 @@ import PropTypes from 'prop-types'
 export default function IngredientsSelected ({items}) {
     const [itemBun, itemsOther] = React.useMemo(()=>{
         const itemBun = items.find( e => e.type === 'bun');
-        const itemsOther = items.filter( e => e.type !== 'bun');
+        const itemsOther = items.filter( e => e.type !== 'bun').reduce((acc,cur) => {
+            if(cur.count > 1) {
+                const newArr = [...Array(cur.count)].map(() => cur)
+                return [...acc, ...newArr]
+            } else {
+                return [...acc, cur]
+            }
+            
+        },[]);
         return [itemBun, itemsOther]
     }, [items])
     return (
         <div className={style.container}>
             <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'}/>
             <div className={style.containerScroll}> 
-                {itemsOther.map( e => (
-                    <IngredientSelected item={e} key={e._id}/>
+                {itemsOther.map( (e, k) => (
+                    <IngredientSelected item={e} key={k}/>
                 ))}
             </div>
              <IngredientSelected item={{...itemBun, name: itemBun.name + ' (низ)'}} styleClass={`last`}/>

@@ -1,9 +1,20 @@
+import React, {useContext} from 'react'
 import { CurrencyIcon, LockIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-selected.module.scss'
 import { DeleteIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/delete-icon";
 import PropTypes from 'prop-types'
+import { IngredientsContext } from '../../services/IngredientsContext';
 
 export default function IngredientSelected ({item, styleClass}) {
+    const {setData} = useContext(IngredientsContext)
+    const remove = () => {
+        setData({
+            type: 'remove',
+            payload: {
+                id: item._id
+            }
+        })
+    }
     return (
         <div className={`${style.item} ${styleClass ? style[styleClass] : ''}`}>
             {
@@ -17,7 +28,7 @@ export default function IngredientSelected ({item, styleClass}) {
                 styleClass ?
                 <LockIcon type="secondary" />
                 :
-                <div className={style.remove}><DeleteIcon type="primary" /></div>
+                <div className={style.remove} onClick={remove}><DeleteIcon type="primary" /></div>
             }
         </div>
     )

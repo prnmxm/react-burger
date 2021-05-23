@@ -1,11 +1,12 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import React, {useContext} from 'react'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { category } from '../../utils/constants';
-import { IngredientDetails } from '../ingredient-details'
-function BurgerIngredients ({items, setModal}) {
+import { IngredientsContext } from '../../services/IngredientsContext';
+
+function BurgerIngredients () {
+    const {data: {main:items}} = useContext(IngredientsContext)
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);
         if (item) {
@@ -34,27 +35,10 @@ function BurgerIngredients ({items, setModal}) {
         return arr
     }, [items])
     const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
-    const showItem = React.useCallback((event) => {
-        const target = event.target.closest('[data-id]');
-        if(!target) return;
-        const id = target.dataset.id
-        const item = items.find(e=> e._id === id);
-        setModal({
-            isShow: true,
-            title: 'Детали ингредиента',
-            content: <IngredientDetails 
-            image={item.image} 
-            name={item.name} 
-            desc={'Превосходное описание'} 
-            calories={123} 
-            proteins={123} 
-            fats={123}
-            carbohydrates={123}
-            />
-        })
-    },[])
+  
+
     return (
-        <div className={`${style.container}`} onClick={showItem}>
+        <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
             <div className={`mb-5`}>
                 <Tab items={categoryList}/>
@@ -63,20 +47,5 @@ function BurgerIngredients ({items, setModal}) {
         </div> 
     )
 }
-BurgerIngredients.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        calories: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        __v: PropTypes.number,
-    })).isRequired,
-}
+
 export default BurgerIngredients;
