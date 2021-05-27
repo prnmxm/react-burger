@@ -1,16 +1,18 @@
-import React, {useContext} from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {IngredientsSelected} from '../ingredients-selected'
 import style from './burger-constructor.module.scss';
 import {OrderDetails} from '../order-details'
-import { IngredientsContext } from '../../services/IngredientsContext';
 import { ModalContext } from '../../services/ModalContext';
+import { useSelector, shallowEqual } from 'react-redux';
+import { IngredientsEmpty } from '../ingredients-empty';
 
 function BurgerConstructor () {
-    const {data: {main: selected}} = useContext(IngredientsContext)
+    const {selectedItems} = useSelector(store => ({
+        selectedItems: store.ingredients.selectedItems,
+    }),shallowEqual)
     const setModal = React.useContext(ModalContext)
-    const items = selected.filter( e => e.selected);
+    const items = selectedItems.filter( e => e.selected);
     const price = React.useMemo(()=>items.reduce((acc,cur) => {
         return acc + cur.price * cur.count;
     },0),[items])
@@ -50,7 +52,7 @@ function BurgerConstructor () {
                         </Button>
                     </div>
                 </>
-            }
+            || <IngredientsEmpty/>}
         </div> 
     )
 }

@@ -1,12 +1,14 @@
-import React, {useContext} from 'react'
+import React from 'react'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { category } from '../../utils/constants';
-import { IngredientsContext } from '../../services/IngredientsContext';
+import { useSelector, shallowEqual } from 'react-redux';
 
 function BurgerIngredients () {
-    const {data: {main:items}} = useContext(IngredientsContext)
+    const {items} = useSelector(store => ({
+        items: store.ingredients.items,
+    }),shallowEqual)
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);
         if (item) {
