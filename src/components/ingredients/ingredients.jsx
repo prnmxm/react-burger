@@ -2,7 +2,7 @@ import { IngredientCategory } from '../ingredient-category'
 import style from './ingredients.module.scss'
 import PropTypes from 'prop-types'
 import { useRef } from 'react';
-import { SET_ACTIVE_TAB} from '../../services/actions/index'
+import { SET_ACTIVE_TAB_SCROLL } from '../../services/actions/index'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
 
@@ -24,7 +24,7 @@ export default function Ingredients ({items}) {
             const mapCheck = tabs.map( e => scrollView(document.querySelector(`[data-name=${e}]`)));
             const i = mapCheck.indexOf(Math.min(...mapCheck))
             dispatch({
-                type: SET_ACTIVE_TAB,
+                type: SET_ACTIVE_TAB_SCROLL,
                 payload: tabs[i]
             })
         }

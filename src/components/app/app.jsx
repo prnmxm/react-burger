@@ -14,8 +14,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend'
 
 function App () {
     const dispatch = useDispatch();
-    const {items, itemsLoaded, itemsError} = useSelector(store => ({
-        items: store.ingredients.items,
+    const {itemsLoaded, itemsError} = useSelector(store => ({
         itemsLoaded: store.ingredients.itemsLoaded,
         itemsError: store.ingredients.itemsError
     }), shallowEqual)
@@ -47,7 +46,6 @@ function App () {
                 type: GET_INGREDIENTS_SUCCESS,
                 payload: modData,
             })
-            console.log(modData);
         })
         .catch((e) => {
             dispatch({
@@ -55,13 +53,11 @@ function App () {
             })
         })
     }, [])
-
     return (
         <>
             <AppHeader /> 
             <ModalContext.Provider value={setModalData}>
                 {itemsLoaded && !itemsError && <main className={`pt-5 ${style.container}`}>
-
 				<DndProvider backend={HTML5Backend}>
                     <BurgerIngredients/> 
                     <BurgerConstructor/>

@@ -1,4 +1,4 @@
-import { SET_ACTIVE_TAB, SET_ACTIVE_TAB_CLICK, SET_DISABLE,DEL_DISABLE } from '../actions/index';
+import { SET_ACTIVE_TAB_SCROLL, SET_ACTIVE_TAB_CLICK, SET_DISABLE,DEL_DISABLE } from '../actions/index';
 const initialState = {
     tabs: ['Булочки','Начинки','Соусы'],
     active: 'Булочки',
@@ -6,7 +6,7 @@ const initialState = {
 };
 export const tabsReducer = ( state = initialState , action ) => {
     switch(action.type) {
-        case SET_ACTIVE_TAB: {
+        case SET_ACTIVE_TAB_SCROLL: {
             return {
                 ...state,
                 active: action.payload

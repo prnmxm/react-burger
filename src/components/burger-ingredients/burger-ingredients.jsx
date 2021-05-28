@@ -6,9 +6,8 @@ import { category } from '../../utils/constants';
 import { useSelector, shallowEqual } from 'react-redux';
 
 function BurgerIngredients () {
-    const {items,active} = useSelector(store => ({
+    const {items} = useSelector(store => ({
         items: store.ingredients.items,
-         active: store.tabs.active,
     }),shallowEqual)
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);
@@ -38,8 +37,6 @@ function BurgerIngredients () {
         return arr
     }, [items])
     const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
-  
-
     return (
         <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
