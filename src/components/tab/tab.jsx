@@ -2,7 +2,7 @@ import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './tab.module.scss';
 import PropTypes from 'prop-types'
 import {useDispatch} from 'react-redux';
-import { SET_ACTIVE_TAB_CLICK, SET_DISABLE, DEL_DISABLE} from '../../services/actions/index'
+import { SET_ACTIVE_TAB_CLICK } from '../../services/actions/tabs'
 import { useSelector, shallowEqual } from 'react-redux';
 
 export default function TabSection ({items}) {
@@ -12,18 +12,9 @@ export default function TabSection ({items}) {
 }),shallowEqual)
   function changeCategory (el) {
       dispatch({
-        type: SET_DISABLE,
-      })
-      dispatch({
         type: SET_ACTIVE_TAB_CLICK,
         payload: el
       })
-      setTimeout(() => {
-        dispatch({
-          type: DEL_DISABLE,
-        })
-      }, 500)
-
   }
     return (
       <div className={style.container}>

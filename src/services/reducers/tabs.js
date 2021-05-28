@@ -1,8 +1,8 @@
-import { SET_ACTIVE_TAB_SCROLL, SET_ACTIVE_TAB_CLICK, SET_DISABLE,DEL_DISABLE } from '../actions/index';
+import { SET_ACTIVE_TAB_SCROLL, SET_ACTIVE_TAB_CLICK, ADD_ITEMS_TITLE, ADD_ITEMS_REF } from '../actions/tabs';
 const initialState = {
-    tabs: ['Булочки','Начинки','Соусы'],
-    active: 'Булочки',
-    disable: false,
+    tabs: [],
+    active: '',
+    refs: [],
 };
 export const tabsReducer = ( state = initialState , action ) => {
     switch(action.type) {
@@ -13,23 +13,27 @@ export const tabsReducer = ( state = initialState , action ) => {
             }
         }
         case SET_ACTIVE_TAB_CLICK: {
-      document.querySelector(`[data-name=${action.payload}]`).scrollIntoView({block: "start", behavior: "smooth"});
+            const item = state.refs.find( e => e.name === action.payload);
+            item.ref.scrollIntoView({block: "start", behavior: 'smooth'});
             return {
                 ...state,
                 active: action.payload,
             }
         }
-        case SET_DISABLE: {
+        case ADD_ITEMS_TITLE: {
             return {
                 ...state,
-                disable: true,
+                tabs: action.payload,
+                active: action.payload[0]
             }
         }
-        case DEL_DISABLE: {
-            return {
-                ...state,
-                disable: false,
-            }
+        case ADD_ITEMS_REF: {
+            const newState = {...state}
+            newState.refs.push({
+                ref: action.payload.ref,
+                name: action.payload.name
+            });
+            return newState;
         }
         default: {
             return state;

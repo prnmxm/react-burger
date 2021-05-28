@@ -1,4 +1,0 @@
-export const SET_ACTIVE_TAB_SCROLL = 'SET_ACTIVE_TAB'; 
-export const SET_DISABLE = 'SET_DISABLE'; 
-export const DEL_DISABLE = 'DEL_DISABLE'; 
-export const SET_ACTIVE_TAB_CLICK = 'SET_ACTIVE_TAB_CLICK'; 

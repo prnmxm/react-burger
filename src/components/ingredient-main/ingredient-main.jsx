@@ -2,11 +2,12 @@ import React, {useContext} from 'react'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-main.module.scss'
 import PropTypes from 'prop-types'
-import { ModalContext } from '../../services/ModalContext';
 import { IngredientDetails } from '../ingredient-details'
 import { useDrag } from "react-dnd";
+import { useDispatch } from 'react-redux';
+import { OPEN_MODAL } from '../../services/actions/modal';
 export default function IngredientMain ({item}) {
-    const setModal = useContext(ModalContext)
+    const dispatch = useDispatch();
     const [{isDrag},dragRef] = useDrag({
         type: 'product',
         item,
@@ -16,18 +17,20 @@ export default function IngredientMain ({item}) {
 
     });
     const showItem = React.useCallback((event) => {
-        setModal({
-            isShow: true,
-            title: 'Детали ингредиента',
-            content: <IngredientDetails 
-            image={item.image} 
-            name={item.name} 
-            desc={'Превосходное описание'} 
-            calories={item.calories} 
-            proteins={item.proteins} 
-            fats={item.fat}
-            carbohydrates={item.carbohydrates}
-            />
+        dispatch({
+            type: OPEN_MODAL,
+            payload: {
+                title: 'Детали ингредиента',
+                content:  <IngredientDetails 
+                    image={item.image} 
+                    name={item.name} 
+                    desc={'Превосходное описание'} 
+                    calories={item.calories} 
+                    proteins={item.proteins} 
+                    fats={item.fat}
+                    carbohydrates={item.carbohydrates}
+                    />
+            }
         })
     },[])
     return (

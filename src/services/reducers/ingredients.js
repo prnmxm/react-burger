@@ -1,17 +1,18 @@
-import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_ERROR, INGREDIENTS_ADD, INGREDIENTS_REMOVE } from '../actions/ingredients';
+import { GET_INGREDIENTS_REQUEST, 
+    GET_INGREDIENTS_SUCCESS, 
+    GET_INGREDIENTS_ERROR, 
+    INGREDIENTS_ADD, 
+    INGREDIENTS_REMOVE,
+    INGREDIENTS_SELECTED_CLEAR } from '../actions/ingredients';
 const initialState = {
     items: [],
     itemsRequest: false,
     itemsLoaded: false,
     itemsError: false,
 
-    selectedItems: [],
+    selected: [],
     isDisabledOrder: true,
-    isSelectedBun: false,
     selectedBun: {},
-    orderRequest: false,
-    orderdLoaded: false,
-    orderError: false,
 };
 export const ingredientsReducer = ( state = initialState , action ) => {
     switch(action.type) {
@@ -47,12 +48,10 @@ export const ingredientsReducer = ( state = initialState , action ) => {
                     }
                 }
                 return e;
-            }), selectedItems: [...state.selectedItems ]}
+            }), selected: [...state.selected ]}
             if (action.payload.type === 'bun') {
-                newState.isSelectedBun = true;
                 newState.isDisabledOrder = false;
-                newState.selectedBun = action.payload;
-                newState.selectedItems = newState.selectedItems.filter( e => {
+                newState.selected = newState.selected.filter( e => {
                     if(e.type === 'bun') {
                         return false;
                     }
@@ -73,7 +72,7 @@ export const ingredientsReducer = ( state = initialState , action ) => {
                     return e
                 })
             }
-            newState.selectedItems = [...newState.selectedItems, action.payload]
+            newState.selected = [...newState.selected, action.payload]
             return newState
         }
         case INGREDIENTS_REMOVE: {
@@ -87,6 +86,12 @@ export const ingredientsReducer = ( state = initialState , action ) => {
                 return e;
             }), selectedItems: [...state.selectedItems.filter(e => e.customId !== action.payload.customId) ]}
             return newState
+        }
+        case INGREDIENTS_SELECTED_CLEAR: {
+            return {
+                ...state,
+                selected: []
+            }
         }
         default: {
             return state;

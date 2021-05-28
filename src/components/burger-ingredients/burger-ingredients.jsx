@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { category } from '../../utils/constants';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { ADD_ITEMS_TITLE, ADD_ITEMS_REF } from '../../services/actions/tabs'
 
 function BurgerIngredients () {
+    const dispatch = useDispatch();
     const {items} = useSelector(store => ({
         items: store.ingredients.items,
     }),shallowEqual)
@@ -37,13 +39,23 @@ function BurgerIngredients () {
         return arr
     }, [items])
     const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
+    dispatch({
+        type: ADD_ITEMS_TITLE,
+        payload: categoryList
+    })
+    function refsTabs(ref, name) {
+        dispatch({
+            type: ADD_ITEMS_REF,
+            payload: {ref, name}
+        })
+    }
     return (
         <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
             <div className={`mb-5`}>
                 <Tab items={categoryList}/>
             </div>
-            <Ingredients items={sortToArray}/>
+            <Ingredients items={sortToArray} refsTabs={refsTabs}/>
         </div> 
     )
 }
