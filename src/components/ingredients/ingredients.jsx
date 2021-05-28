@@ -1,9 +1,36 @@
 import { IngredientCategory } from '../ingredient-category'
 import style from './ingredients.module.scss'
 import PropTypes from 'prop-types'
+import { useRef } from 'react';
+import { SET_ACTIVE_TAB} from '../../services/actions/index'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+
+
 export default function Ingredients ({items}) {
+    const dispatch = useDispatch();
+    const {tabs, disable} = useSelector(store => ({
+        tabs: store.tabs.tabs,
+        disable: store.tabs.disable,
+    }),shallowEqual)
+    const containerRef = useRef(null);
+    const scrollView = (el) => {
+      const rect = el.getBoundingClientRect();
+      return (
+            Math.abs(containerRef.current.getBoundingClientRect().top - rect.top)
+      );
+    }
+    const checkElem = () => {
+        if (!disable) {
+            const mapCheck = tabs.map( e => scrollView(document.querySelector(`[data-name=${e}]`)));
+            const i = mapCheck.indexOf(Math.min(...mapCheck))
+            dispatch({
+                type: SET_ACTIVE_TAB,
+                payload: tabs[i]
+            })
+        }
+    }
     return (
-        <div className={style.container}>
+        <div className={style.container} ref={containerRef} onScroll={checkElem}>
            { 
                 items.map( (e, i) => (
                     <div key={i} className={style.category} data-name={e.category}>

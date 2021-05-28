@@ -6,8 +6,9 @@ import { category } from '../../utils/constants';
 import { useSelector, shallowEqual } from 'react-redux';
 
 function BurgerIngredients () {
-    const {items} = useSelector(store => ({
+    const {items,active} = useSelector(store => ({
         items: store.ingredients.items,
+         active: store.tabs.active,
     }),shallowEqual)
     const checkCategory = (text) => {
         const item = category.find((e) => e.name === text);

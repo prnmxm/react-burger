@@ -7,9 +7,13 @@ import { IngredientDetails } from '../ingredient-details'
 import { useDrag } from "react-dnd";
 export default function IngredientMain ({item}) {
     const setModal = useContext(ModalContext)
-    const [,dragRef] = useDrag({
+    const [{isDrag},dragRef] = useDrag({
         type: 'product',
         item,
+        collect: monitor => ({
+            isDrag: monitor.isDragging()
+        })
+
     });
     const showItem = React.useCallback((event) => {
         setModal({
