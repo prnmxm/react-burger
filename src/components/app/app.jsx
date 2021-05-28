@@ -9,6 +9,8 @@ import { ModalContext } from '../../services/ModalContext';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { GET_INGREDIENTS_REQUEST, GET_INGREDIENTS_SUCCESS, GET_INGREDIENTS_ERROR } from '../../services/actions/ingredients'
 
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
 
 function App () {
     const dispatch = useDispatch();
@@ -59,8 +61,11 @@ function App () {
             <AppHeader /> 
             <ModalContext.Provider value={setModalData}>
                 {itemsLoaded && !itemsError && <main className={`pt-5 ${style.container}`}>
+
+				<DndProvider backend={HTML5Backend}>
                     <BurgerIngredients/> 
                     <BurgerConstructor/>
+                </DndProvider>
                 </main>}
                 {modalData.isShow && <Modal title={modalData.title && modalData.title}>{modalData.content}</Modal>}
             </ModalContext.Provider>

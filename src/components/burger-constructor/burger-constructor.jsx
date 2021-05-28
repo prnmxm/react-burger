@@ -5,17 +5,17 @@ import style from './burger-constructor.module.scss';
 import {OrderDetails} from '../order-details'
 import { ModalContext } from '../../services/ModalContext';
 import { useSelector, shallowEqual } from 'react-redux';
-import { IngredientsEmpty } from '../ingredients-empty';
 
 function BurgerConstructor () {
-    const {selectedItems} = useSelector(store => ({
+    const {selectedItems, isDisabledOrder, items} = useSelector(store => ({
         selectedItems: store.ingredients.selectedItems,
+        isDisabledOrder: store.ingredients.isDisabledOrder,
+        items: store.ingredients.items
     }),shallowEqual)
     const setModal = React.useContext(ModalContext)
-    const items = selectedItems.filter( e => e.selected);
     const price = React.useMemo(()=>items.reduce((acc,cur) => {
         return acc + cur.price * cur.count;
-    },0),[items])
+    },0),[selectedItems])
     function click(e) {
         fetch('https://norma.nomoreparties.space/api/orders', {
             method: 'POST',
@@ -23,7 +23,7 @@ function BurgerConstructor () {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                ingredients: items.map( e => e._id)
+                ingredients: selectedItems.map( e => e._id)
             })
         })
         .then(e => {
@@ -41,18 +41,18 @@ function BurgerConstructor () {
     }
     return (
         <div className={style.container}>
-            {items.length !== 0 &&
                 <>
-                    <IngredientsSelected items={items}/>
-                    <div className={style.footer}>
+                    <IngredientsSelected items={selectedItems}/>
+                    { selectedItems.length !== 0 &&
+                        <div className={style.footer}>
                         <span className={`text text_type_digits-large ${style.price}`}>{price} 
                         <CurrencyIcon type="primary" /></span>
-                        <Button type="primary" size="large" onClick={click}> 
+                        {!isDisabledOrder && <Button type="primary" size="large" onClick={click}> 
                             Оформить заказ
-                        </Button>
+                        </Button>}
                     </div>
+                    }
                 </>
-            || <IngredientsEmpty/>}
         </div> 
     )
 }

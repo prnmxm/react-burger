@@ -1,11 +1,7 @@
 import style from './ingredients-empty.module.scss';
 
-export default function IngredientsEmpty() {
+export default function IngredientsEmpty(props) {
     return (
-        <div className={style.container}>
-            <div className={style.place}>Булка</div>
-            <div className={style.place}>Начинка</div>
-            <div className={style.place}>Булка</div>
-        </div>
+        <div className={style.place}>{props.children}</div>
     )
 }

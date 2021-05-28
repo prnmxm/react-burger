@@ -4,33 +4,31 @@ import style from './ingredient-main.module.scss'
 import PropTypes from 'prop-types'
 import { ModalContext } from '../../services/ModalContext';
 import { IngredientDetails } from '../ingredient-details'
-import { IngredientsContext } from '../../services/IngredientsContext';
-
+import {useDispatch} from 'react-redux'
+import { INGREDIENTS_ADD } from '../../services/actions/ingredients'
+import { v4 as uuidv4 } from 'uuid';
 export default function IngredientMain ({item}) {
+    const dispatch = useDispatch();
     const setModal = useContext(ModalContext)
-    const {setData} = useContext(IngredientsContext)
     const showItem = React.useCallback((event) => {
-        setModal({
-            isShow: true,
-            title: 'Детали ингредиента',
-            content: <IngredientDetails 
-            image={item.image} 
-            name={item.name} 
-            desc={'Превосходное описание'} 
-            calories={item.calories} 
-            proteins={item.proteins} 
-            fats={item.fat}
-            carbohydrates={item.carbohydrates}
-            />
-        })
+        // setModal({
+        //     isShow: true,
+        //     title: 'Детали ингредиента',
+        //     content: <IngredientDetails 
+        //     image={item.image} 
+        //     name={item.name} 
+        //     desc={'Превосходное описание'} 
+        //     calories={item.calories} 
+        //     proteins={item.proteins} 
+        //     fats={item.fat}
+        //     carbohydrates={item.carbohydrates}
+        //     />
+        // })
     },[])
     const selectItem = (e) => {
-        setData({
-            type: 'add',
-            payload: {
-                id: item._id,
-                type: item.type
-            }
+        dispatch({
+            type: INGREDIENTS_ADD,
+            payload: {...item, customId: uuidv4()}
         })
     }
     return (

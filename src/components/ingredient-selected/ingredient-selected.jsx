@@ -3,16 +3,15 @@ import { CurrencyIcon, LockIcon, DragIcon } from '@ya.praktikum/react-developer-
 import style from './ingredient-selected.module.scss'
 import { DeleteIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/delete-icon";
 import PropTypes from 'prop-types'
-import { IngredientsContext } from '../../services/IngredientsContext';
+import {useDispatch} from 'react-redux'
+import { INGREDIENTS_REMOVE } from '../../services/actions/ingredients'
 
 export default function IngredientSelected ({item, styleClass}) {
-    const {setData} = useContext(IngredientsContext)
+    const dispatch = useDispatch();
     const remove = () => {
-        setData({
-            type: 'remove',
-            payload: {
-                id: item._id
-            }
+        dispatch({
+            type: INGREDIENTS_REMOVE,
+            payload: item
         })
     }
     return (
