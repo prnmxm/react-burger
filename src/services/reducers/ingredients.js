@@ -90,7 +90,10 @@ export const ingredientsReducer = ( state = initialState , action ) => {
         case INGREDIENTS_SELECTED_CLEAR: {
             return {
                 ...state,
-                selected: []
+                selected: [],
+                items: state.items.map( e => {
+                    return {...e, count: 0}
+                })
             }
         }
         default: {
