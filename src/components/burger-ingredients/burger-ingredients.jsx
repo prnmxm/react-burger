@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useCallback } from 'react'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
@@ -38,17 +38,21 @@ function BurgerIngredients () {
         }
         return arr
     }, [items])
-    const categoryList = React.useMemo(()=> sortToArray.map(e => e.category), [items]);
-    dispatch({
-        type: ADD_ITEMS_TITLE,
-        payload: categoryList
-    })
-    function refsTabs(ref, name) {
+    const categoryList = React.useMemo(()=> {
+        const arr = sortToArray.map(e => e.category)
+        dispatch({
+            type: ADD_ITEMS_TITLE,
+            payload: arr 
+        })
+        return arr 
+    }, []);
+
+    const refsTabs = useCallback((ref, name) => {
         dispatch({
             type: ADD_ITEMS_REF,
             payload: {ref, name}
         })
-    }
+    })
     return (
         <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>
