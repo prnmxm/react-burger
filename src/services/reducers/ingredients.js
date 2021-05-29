@@ -101,7 +101,6 @@ export const ingredientsReducer = ( state = initialState , action ) => {
             }
         }
         case INGREDIENTS_SELECTED_UPDATE: {
-            console.log('update');
             const newState = [...state.selected];
             newState.splice(action.payload.to, 0, newState.splice(action.payload.from, 1)[0]);
       
