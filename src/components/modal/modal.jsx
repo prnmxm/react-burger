@@ -4,26 +4,26 @@ import React from 'react';
 import style from './modal.module.scss' 
 import {ModalOverlay} from '../modal-overlay'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import PropTypes from 'prop-types'
-import { ModalContext } from '../../services/ModalContext';
+import { useDispatch, useSelector } from 'react-redux';
+import { CLOSE_MODAL } from '../../services/actions/modal';
 
-function Modal(props) {
-    const setModal = React.useContext(ModalContext)
+function Modal() {
+    const dispatch = useDispatch();
+    const {title, content} = useSelector( store => ({
+        title: store.modal.title,
+        content: store.modal.content
+    }))
     function clear (e) {
         if(e.keyCode === 27) {
-            setModal({
-                isShow: false,
-                title: null,
-                content: null,
-            }) 
+            dispatch({
+                type: CLOSE_MODAL
+            })
         }
     }
     const close = React.useCallback(() => {
-        setModal({
-            isShow: false,
-            title: null,
-            content: null,
-        }) 
+        dispatch({
+            type: CLOSE_MODAL
+        })
     },[])
     React.useEffect(()=> {
         window.addEventListener('keydown', clear)
@@ -36,13 +36,13 @@ function Modal(props) {
             <>
                 <div className={style.modal + ' p-10'}>
                     <div className={style.header}>
-                        {   props.title &&
-                            <h3 className={'text text_type_main-medium ' + style.title}>{props.title}</h3>
+                        {   title &&
+                            <h3 className={'text text_type_main-medium ' + style.title}>{title}</h3>
                         }
                         <div className={style.iconClose} onClick={close}><CloseIcon/></div>
                     </div>
                     <div className={style.body}>
-                        {props.children}
+                        {content}
                     </div>
                 </div>
                 <ModalOverlay close={close}/>
@@ -50,9 +50,5 @@ function Modal(props) {
         ),
         modalRoot
     )
-}
-Modal.propTypes = {
-    children: PropTypes.element,
-    title: PropTypes.string
 }
 export default Modal;

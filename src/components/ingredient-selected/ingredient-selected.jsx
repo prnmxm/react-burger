@@ -1,22 +1,61 @@
-import React, {useContext} from 'react'
+import React, {useContext, useRef} from 'react'
 import { CurrencyIcon, LockIcon, DragIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-selected.module.scss'
 import { DeleteIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/delete-icon";
 import PropTypes from 'prop-types'
-import { IngredientsContext } from '../../services/IngredientsContext';
+import {useDispatch, useSelector, useStore} from 'react-redux'
+import { INGREDIENTS_REMOVE, INGREDIENTS_SELECTED_UPDATE } from '../../services/actions/ingredients'
+import { useDrag, useDrop } from 'react-dnd';
 
-export default function IngredientSelected ({item, styleClass}) {
-    const {setData} = useContext(IngredientsContext)
-    const remove = () => {
-        setData({
-            type: 'remove',
+export default function IngredientSelected ({item, styleClass, lock}) {
+    const dispatch = useDispatch();
+    const {selected} = useSelector(store => ({
+        selected: store.ingredients.selected
+    }));
+    const ref = useRef(null);
+    const index = selected.findIndex(e => e.customId === item.customId);
+    const [, drop] = useDrop({
+        accept: 'ingMain',
+        hover(e) {
+          if (!ref.current) {
+            return;
+          }
+          const dragIndex = e.index;
+          const hoverIndex = index;
+          if (dragIndex === hoverIndex) {
+            return;
+          }
+          dispatch({
+            type: INGREDIENTS_SELECTED_UPDATE,
             payload: {
-                id: item._id
+                from: hoverIndex,
+                to: dragIndex
             }
+          });
+    
+          e.index = hoverIndex;
+        },
+      });
+      const [{ isDrag }, drag] = useDrag({
+        type: 'ingMain',
+        item: {
+          index: index
+        },
+        collect: monitor => ({
+          isDrag: monitor.isDragging()
+        })
+      });
+    
+    const remove = () => {
+        dispatch({
+            type: INGREDIENTS_REMOVE,
+            payload: item
         })
     }
+    const opacity = isDrag ? 0 : 1;
+    drag(drop(ref));
     return (
-        <div className={`${style.item} ${styleClass ? style[styleClass] : ''}`}>
+        <div className={`${style.item} ${styleClass ? style[styleClass] : ''}`}  {...(!lock && {ref:ref})}style={{opacity}} >
             {
                 !styleClass &&
                 <div className={style.dragdrop}><DragIcon type="primary" /></div>

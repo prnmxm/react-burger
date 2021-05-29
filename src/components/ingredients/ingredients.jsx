@@ -1,12 +1,36 @@
 import { IngredientCategory } from '../ingredient-category'
 import style from './ingredients.module.scss'
 import PropTypes from 'prop-types'
-export default function Ingredients ({items}) {
+import { useRef } from 'react';
+import { SET_ACTIVE_TAB_SCROLL } from '../../services/actions/tabs'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+
+
+export default function Ingredients ({items, refsTabs}) {
+    const dispatch = useDispatch();
+    const {tabs} = useSelector(store => ({
+        tabs: store.tabs.tabs,
+    }),shallowEqual)
+    const containerRef = useRef(null);
+    const scrollView = (el) => {
+      const rect = el.getBoundingClientRect();
+      return (
+            Math.abs(containerRef.current.getBoundingClientRect().top - rect.top)
+      );
+    }
+    const checkElem = () => {
+        const mapCheck = tabs.map( e => scrollView(document.querySelector(`[data-name=${e}]`)));
+        const i = mapCheck.indexOf(Math.min(...mapCheck))
+        dispatch({
+            type: SET_ACTIVE_TAB_SCROLL,
+            payload: tabs[i]
+        })
+    }
     return (
-        <div className={style.container}>
+        <div className={style.container} ref={containerRef} onScroll={checkElem}>
            { 
                 items.map( (e, i) => (
-                    <div key={i} className={style.category} data-name={e.category}>
+                    <div key={i} className={style.category} data-name={e.category} ref={el => refsTabs(el, e.category)}>
                         <h3 className={`text text_type_main-medium ${style.title} mb-3`}>
                             {e.category}
                         </h3>

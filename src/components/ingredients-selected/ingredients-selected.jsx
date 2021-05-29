@@ -2,30 +2,47 @@ import React from 'react'
 import style from './ingredients-selected.module.scss'
 import {IngredientSelected} from '../ingredient-selected'
 import PropTypes from 'prop-types'
+import { IngredientsEmpty } from '../ingredients-empty'
+import { useDrop } from "react-dnd";
+import {useDispatch} from 'react-redux'
+import { INGREDIENTS_ADD } from '../../services/actions/ingredients'
+import { v4 as uuidv4 } from 'uuid';
 
 export default function IngredientsSelected ({items}) {
+    const dispatch = useDispatch();
+    const [, dropTarget] = useDrop({
+        accept: 'product',
+        drop(item) {
+            handleDrop(item)
+        },
+    });
+    const handleDrop = (item) => {
+        dispatch({
+            type: INGREDIENTS_ADD,
+            payload: {...item, customId: uuidv4()}
+        })
+    };
     const [itemBun, itemsOther] = React.useMemo(()=>{
         const itemBun = items.find( e => e.type === 'bun');
-        const itemsOther = items.filter( e => e.type !== 'bun').reduce((acc,cur) => {
-            if(cur.count > 1) {
-                const newArr = [...Array(cur.count)].map(() => cur)
-                return [...acc, ...newArr]
-            } else {
-                return [...acc, cur]
-            }
-            
-        },[]);
+        const itemsOther = items.filter( e => e.type !== 'bun');
         return [itemBun, itemsOther]
     }, [items])
     return (
-        <div className={style.container}>
-            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'}/>
+        <div className={style.container} ref={dropTarget}>
+            {itemBun && 
+            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'} lock={true}/> 
+            || <IngredientsEmpty>Булка</IngredientsEmpty>}
+            {itemsOther.length !== 0 &&
             <div className={style.containerScroll}> 
-                {itemsOther.map( (e, k) => (
-                    <IngredientSelected item={e} key={k}/>
+                {itemsOther.map( (e, i) => (
+                    <IngredientSelected item={e} key={e.customId} lock={false}/>
                 ))}
             </div>
-             <IngredientSelected item={{...itemBun, name: itemBun.name + ' (низ)'}} styleClass={`last`}/>
+            || <IngredientsEmpty>Начинка</IngredientsEmpty>
+            }
+            {itemBun && 
+            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (низ)'}} styleClass={`last`} lock={true}/> 
+            || <IngredientsEmpty>Булка</IngredientsEmpty>}
         </div>
     )
 } 
