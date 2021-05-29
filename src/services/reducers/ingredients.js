@@ -3,7 +3,8 @@ import { GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_ERROR, 
     INGREDIENTS_ADD, 
     INGREDIENTS_REMOVE,
-    INGREDIENTS_SELECTED_CLEAR } from '../actions/ingredients';
+    INGREDIENTS_SELECTED_CLEAR,
+    INGREDIENTS_SELECTED_UPDATE } from '../actions/ingredients';
 const initialState = {
     items: [],
     itemsRequest: false,
@@ -73,6 +74,9 @@ export const ingredientsReducer = ( state = initialState , action ) => {
                 })
             }
             newState.selected = [...newState.selected, action.payload]
+            if (action.payload.type === 'bun') {
+                newState.selected = [...newState.selected, action.payload]
+            }
             return newState
         }
         case INGREDIENTS_REMOVE: {
@@ -84,7 +88,7 @@ export const ingredientsReducer = ( state = initialState , action ) => {
                     }
                 }
                 return e;
-            }), selectedItems: [...state.selectedItems.filter(e => e.customId !== action.payload.customId) ]}
+            }), selected: [...state.selected.filter(e => e.customId !== action.payload.customId) ]}
             return newState
         }
         case INGREDIENTS_SELECTED_CLEAR: {
@@ -94,6 +98,16 @@ export const ingredientsReducer = ( state = initialState , action ) => {
                 items: state.items.map( e => {
                     return {...e, count: 0}
                 })
+            }
+        }
+        case INGREDIENTS_SELECTED_UPDATE: {
+            console.log('update');
+            const newState = [...state.selected];
+            newState.splice(action.payload.to, 0, newState.splice(action.payload.from, 1)[0]);
+      
+            return {
+              ...state,
+              selected: newState
             }
         }
         default: {

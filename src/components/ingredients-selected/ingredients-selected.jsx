@@ -30,18 +30,18 @@ export default function IngredientsSelected ({items}) {
     return (
         <div className={style.container} ref={dropTarget}>
             {itemBun && 
-            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'}/> 
+            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'} lock={true}/> 
             || <IngredientsEmpty>Булка</IngredientsEmpty>}
             {itemsOther.length !== 0 &&
             <div className={style.containerScroll}> 
-                {itemsOther.map( (e) => (
-                    <IngredientSelected item={e} key={e.customId}/>
+                {itemsOther.map( (e, i) => (
+                    <IngredientSelected item={e} key={e.customId} lock={false}/>
                 ))}
             </div>
             || <IngredientsEmpty>Начинка</IngredientsEmpty>
             }
             {itemBun && 
-            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (низ)'}} styleClass={`last`}/> 
+            <IngredientSelected item={{...itemBun, name: itemBun.name + ' (низ)'}} styleClass={`last`} lock={true}/> 
             || <IngredientsEmpty>Булка</IngredientsEmpty>}
         </div>
     )
