@@ -1,32 +1,38 @@
 import { AppHeader } from '../app-header'
-import { BurgerConstructor } from '../burger-constructor'
-import { BurgerIngredients } from '../burger-ingredients'
-import React from 'react';
-import style from './app.module.scss';
 import { Modal } from '../modal';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { getIngredients } from '../../services/actions/ingredients'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { Main } from '../main'
+import { useSelector, shallowEqual } from 'react-redux';
+
 function App () {
-    const dispatch = useDispatch();
-    const {itemsLoaded, itemsError, isOpen} = useSelector(store => ({
-        itemsLoaded: store.ingredients.itemsLoaded,
-        itemsError: store.ingredients.itemsError,
+    const {isOpen} = useSelector(store => ({
         isOpen: store.modal.isOpen
     }), shallowEqual)
-    React.useEffect(() => {
-        dispatch(getIngredients());
-    }, [dispatch])
     return (
         <>
         <AppHeader /> 
-        {itemsLoaded && !itemsError && <main className={`pt-5 ${style.container}`}>
-        <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients/> 
-            <BurgerConstructor/>
-        </DndProvider>
-        </main>}
+        <Router>
+        <Switch>
+            <Route path="/">
+                <Main/>
+            </Route>
+            <Route path="/login" exact={true}>
+                
+            </Route>
+            <Route path="/register" exact={true}>
+                
+            </Route>
+            <Route path="/forgot-password" exact={true}>
+                
+            </Route>
+            <Route path="/reset-password" exact={true}>
+                
+            </Route>
+            <Route path="/feed" exact={true}>
+                
+            </Route>
+        </Switch>
+        </Router>
         {isOpen && <Modal/>}
         </>
     )
