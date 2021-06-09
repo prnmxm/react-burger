@@ -7,6 +7,8 @@ import { Registration } from '../registration'
 import { useSelector, shallowEqual } from 'react-redux';
 import { ForgotPassword } from '../forgot-password';
 import { ResetPassword } from '../reset-password';
+import { Feed } from '../feed';
+import { Profile } from '../profile';
 
 function App () {
     const {isOpen} = useSelector(store => ({
@@ -14,8 +16,8 @@ function App () {
     }), shallowEqual)
     return (
         <>
-        <AppHeader /> 
         <Router>
+        <AppHeader /> 
         <Switch>
             <Route path="/" exact={true}>
                 <Main/>
@@ -33,8 +35,12 @@ function App () {
                 <ResetPassword/>
             </Route>
             <Route path="/feed" exact={true}>
-                
+                <Feed/>
             </Route>
+            <Route path="/profile">
+                <Profile/>
+            </Route>
+      
         </Switch>
         </Router>
         {isOpen && <Modal/>}
