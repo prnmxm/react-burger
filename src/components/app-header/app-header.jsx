@@ -23,7 +23,7 @@ function AppHeader() {
             </NavLink>
           </li>
         </ul>
-        <a href="/" className={style.logo}><Logo /></a>
+        <NavLink to="/" className={style.logo}><Logo /></NavLink>
         <NavLink to="/profile" className={`pb-1 pt-1 text text_type_main-default ${style.button}`} activeClassName={style.active}>
           <ProfileIcon type="secondary" />
           Личный кабинет

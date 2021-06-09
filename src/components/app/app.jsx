@@ -1,15 +1,8 @@
 import { AppHeader } from '../app-header'
 import { Modal } from '../modal';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { Main } from '../main'
-import { Login } from '../login'
-import { Registration } from '../registration'
 import { useSelector, shallowEqual } from 'react-redux';
-import { ForgotPassword } from '../forgot-password';
-import { ResetPassword } from '../reset-password';
-import { Feed } from '../feed';
-import { Profile } from '../profile';
-
+import {Main, Login, Registration, ForgotPassword, ResetPassword, Feed, Profile, OrderDetails} from '../../pages'
 function App () {
     const {isOpen} = useSelector(store => ({
         isOpen: store.modal.isOpen
@@ -37,10 +30,15 @@ function App () {
             <Route path="/feed" exact={true}>
                 <Feed/>
             </Route>
+            <Route path="/feed/:id" exact={true}>
+                <OrderDetails/>
+            </Route>
             <Route path="/profile">
                 <Profile/>
             </Route>
-      
+            <Route>
+                    <h1> 404 </h1>
+            </Route>
         </Switch>
         </Router>
         {isOpen && <Modal/>}

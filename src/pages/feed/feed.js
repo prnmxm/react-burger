@@ -1,5 +1,5 @@
-import { FeedInfo } from '../feed-info'
-import { OrderFeed } from '../orderFeed'
+import { FeedInfo } from '../../components/feed-info'
+import { OrderFeed } from '../../components/orderFeed'
 import styles from './feed.module.scss'
 export default function Feed () {
     return (
