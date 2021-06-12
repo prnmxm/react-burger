@@ -4,9 +4,7 @@ import { Link } from "react-router-dom";
 import React from 'react'
 export default function Forgot () {
     const [value, setValue] = React.useState({
-        mail: '',
-        password: '',
-        name: ''
+        email: '',
     })
     const setValueInput = (e) => {
       setValue((prev) => ({
@@ -14,17 +12,31 @@ export default function Forgot () {
         [e.target.name]: e.target.value
       }))
     }
+    const submit = (e) => {
+        e.preventDefault();
+        fetch('https://norma.nomoreparties.space/api/password-reset', {
+            method: 'POST',
+            body: value
+        }).then( e => {
+            if(e.ok) {
+                return e.json();
+              }
+            return Promise.reject(e)
+        }).then( e => {
+            console.log(e);
+        }).catch( e => console.log(e))
+    }
     return (
         <div className={styles.container}>
             <div className={styles.logo}><Logo /></div>
             <h1 className={`text text_type_main-medium ${styles.title}`}> Восстановление пароля</h1>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={submit}>
                 <div className={styles.input}> 
                     <Input
                         onChange={setValueInput}
                         type={'text'}
-                        value={value.mail}
-                        name={'mail'}
+                        value={value.email}
+                        name={'email'}
                         size={'default'}
                         placeholder={'Укажите e-mail'}
                     />

@@ -8,10 +8,9 @@ import React from 'react';
 import style from './main.module.scss';
 export default function Main () {
     const dispatch = useDispatch();
-    const {itemsLoaded, itemsError, isOpen} = useSelector(store => ({
+    const {itemsLoaded, itemsError} = useSelector(store => ({
         itemsLoaded: store.ingredients.itemsLoaded,
         itemsError: store.ingredients.itemsError,
-        isOpen: store.modal.isOpen
     }), shallowEqual)
     React.useEffect(() => {
         dispatch(getIngredients());
