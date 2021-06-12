@@ -16,7 +16,7 @@ export default function Forgot () {
         e.preventDefault();
         fetch('https://norma.nomoreparties.space/api/password-reset', {
             method: 'POST',
-            body: value
+            body: JSON.stringify(value)
         }).then( e => {
             if(e.ok) {
                 return e.json();

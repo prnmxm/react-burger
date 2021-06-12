@@ -5,9 +5,6 @@ import {useParams} from 'react-router-dom'
 export default function OrderDetails () {
     const items = [1,2,3,4,5,6,7,8,9,10];
     const {id} = useParams();
-
-    console.log(id);
-
     return (
         <div className={styles.container}>
             <div className={styles.header}>
