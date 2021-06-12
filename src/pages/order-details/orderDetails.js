@@ -1,12 +1,17 @@
 import styles from './orderDetails.module.scss';
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
+import {useParams} from 'react-router-dom'
 
 export default function OrderDetails () {
     const items = [1,2,3,4,5,6,7,8,9,10];
+    const {id} = useParams();
+
+    console.log(id);
+
     return (
         <div className={styles.container}>
             <div className={styles.header}>
-                <div className={styles.num}>#034533</div>
+                <div className={styles.num}>#{id}</div>
                 <div className={styles.name}>Black Hole Singularity острый бургер</div>
                 <div className={styles.status}>Выполнен</div>
             </div>
