@@ -1,8 +1,11 @@
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './forgot.module.scss'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import {forgotPassword} from '../../services/actions/user'
+
 import React from 'react'
 export default function Forgot () {
+    const history = useHistory();
     const [value, setValue] = React.useState({
         email: '',
     })
@@ -14,17 +17,7 @@ export default function Forgot () {
     }
     const submit = (e) => {
         e.preventDefault();
-        fetch('https://norma.nomoreparties.space/api/password-reset', {
-            method: 'POST',
-            body: JSON.stringify(value)
-        }).then( e => {
-            if(e.ok) {
-                return e.json();
-              }
-            return Promise.reject(e)
-        }).then( e => {
-            console.log(e);
-        }).catch( e => console.log(e))
+        dispatch(forgotPassword(value));
     }
     return (
         <div className={styles.container}>

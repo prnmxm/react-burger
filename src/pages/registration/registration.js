@@ -1,24 +1,31 @@
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './registration.module.scss'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import {registerUser} from '../../services/actions/user'
 import React from 'react'
+import { useDispatch } from 'react-redux';
 export default function Registration () {
     const [value, setValue] = React.useState({
-        mail: '',
+        email: '',
         password: '',
         name: ''
     })
+    const dispatch = useDispatch();
     const setValueInput = (e) => {
       setValue((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
       }))
     }
+    const submit = (e) => {
+        e.preventDefault();
+        dispatch(registerUser(value));
+    }
     return (
         <div className={styles.container}>
             <div className={styles.logo}><Logo /></div>
             <h1 className={`text text_type_main-medium ${styles.title}`}>Регистрация</h1>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={submit}>
                 <div className={styles.input}> 
                     <Input
                         onChange={setValueInput}
@@ -33,8 +40,8 @@ export default function Registration () {
                     <Input
                         onChange={setValueInput}
                         type={'text'}
-                        value={value.mail}
-                        name={'mail'}
+                        value={value.email}
+                        name={'email'}
                         size={'default'}
                         placeholder={'e-mail'}
                     />

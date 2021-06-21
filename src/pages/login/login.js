@@ -1,10 +1,13 @@
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login.module.scss'
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+import {loginUser} from '../../services/actions/user'
+
 import React from 'react'
 export default function Login () {
+    const history = useHistory();
     const [value, setValue] = React.useState({
-        mail: '',
+        email: '',
         password: ''
     })
     const setValueInput = (e) => {
@@ -13,17 +16,21 @@ export default function Login () {
         [e.target.name]: e.target.value
       }))
     }
+    const submit = (e) => {
+        e.preventDefault();
+        dispatch(loginUser(value));
+    }
     return (
         <div className={styles.container}>
             <div className={styles.logo}><Logo /></div>
             <h1 className={`text text_type_main-medium ${styles.title}`}>Вход</h1>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={submit}>
                 <div className={styles.input}> 
                     <Input
                         onChange={setValueInput}
                         type={'text'}
-                        value={value.mail}
-                        name={'mail'}
+                        value={value.email}
+                        name={'email'}
                         size={'default'}
                         placeholder={'e-mail'}
                     />

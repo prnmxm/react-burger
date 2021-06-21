@@ -1,6 +1,7 @@
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './reset.module.scss'
 import { Link } from "react-router-dom";
+import {resetPassword} from '../../services/actions/user'
 import React from 'react'
 export default function ResetPassword () {
     const [value, setValue] = React.useState({
@@ -15,17 +16,7 @@ export default function ResetPassword () {
     }
     const submit = (e) => {
         e.preventDefault();
-        fetch('https://norma.nomoreparties.space/api/password-reset/reset', {
-            method: 'POST',
-            body: JSON.stringify(value)
-        }).then( e => {
-            if(e.ok) {
-                return e.json();
-              }
-            return Promise.reject(e)
-        }).then( e => {
-            console.log(e);
-        }).catch( e => console.log(e))
+        dispatch(registerUser(value));
     }
     return (
         <div className={styles.container}>
