@@ -90,6 +90,7 @@ export const forgotPassword = (value) => (dispatch) => {
     }).then( e => {
         dispatch({
             type: FORGOT_SUCCESS,
+            payload: value
         });
         dispatch(push('/reset-password'));
     }).catch( e => {
@@ -179,9 +180,13 @@ export const loginUser = (value) => (dispatch) => {
         }
         return Promise.reject(e)
     }).then( e => {
+        const accessToken = e.accessToken.split('Bearer ')[1];
+        const refreshToken = e.refreshToken;
+        setCookie('token', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
         dispatch({
-            type: LOGOUT_SUCCESS,
-            // payload: res.user,
+            type: LOGIN_SUCCESS,
+            payload: e.user,
         });
         dispatch(push('/'));
     }).catch( e => {
@@ -231,11 +236,12 @@ export const userData = (value) => (dispatch) => {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + getCookie('token'),
         },
         mode: 'cors',
         cache: 'no-cache',
         credentials: 'same-origin',
-        body: JSON.stringify(value)
+    
     }).then( e => {
         if(e.ok) {
             return e.json();

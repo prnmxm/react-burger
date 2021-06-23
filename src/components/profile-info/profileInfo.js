@@ -1,21 +1,42 @@
 import styles from './profileInfo.module.scss'
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import React from 'react'
-import {userDataUpdate} from '../../services/actions/user'
-import { useDispatch } from 'react-redux';
+import React, {useEffect, setState} from 'react'
+import {userDataUpdate, userData} from '../../services/actions/user'
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function ProfileInfo () {
     const dispatch = useDispatch();
+    const {email: currentE, name: currentN,userdataSuccess} = useSelector(store => ({
+        email: store.user.email,
+        name: store.user.name,
+        userdataSuccess: store.user.userdataSuccess
+    }));
+    useEffect(() => {
+        dispatch(userData());
+      }, [dispatch]);
+;
     const [value, setValue] = React.useState({
         email: '',
         password: '',
         name: ''
     })
+    useEffect(() => {
+        setValue((state) => {
+          return {
+            ...state,
+            name:currentN,
+            email:currentE,
+          };
+        });
+      }, [currentE, currentN])
     const setValueInput = (e) => {
       setValue((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
       }))
+    }
+    if (!userdataSuccess) {
+        return ''
     }
     const cancel = (e) => {
         e.preventDefault();

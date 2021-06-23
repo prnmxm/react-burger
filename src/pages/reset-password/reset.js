@@ -3,11 +3,16 @@ import styles from './reset.module.scss'
 import { Link } from "react-router-dom";
 import {resetPassword} from '../../services/actions/user'
 import React from 'react'
+import { Redirect } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 export default function ResetPassword () {
     const [value, setValue] = React.useState({
         password: '',
         token: '',
     })
+    const {email} = useSelector(store => ({
+      email: store.user.email,
+  }));
     const setValueInput = (e) => {
       setValue((prev) => ({
         ...prev,
@@ -16,7 +21,26 @@ export default function ResetPassword () {
     }
     const submit = (e) => {
         e.preventDefault();
-        dispatch(registerUser(value));
+        dispatch(resetPassword(value));
+    }
+    const hasToken = localStorage.getItem('refreshToken')
+    if (!email) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/forgot-password'
+          }}
+        />
+      );
+    }
+    if (hasToken) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/'
+          }}
+        />
+      );
     }
     return (
         <div className={styles.container}>

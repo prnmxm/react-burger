@@ -110,6 +110,7 @@ export const userReducer = (state = initialState, action) => {
         case FORGOT_SUCCESS: {
             return {
                 ...state,
+                email: action.payload.email,
                 forgotRequst: false,
                 forgotFailed: false,
                 forgotSuccess: true,
@@ -259,6 +260,8 @@ export const userReducer = (state = initialState, action) => {
         case LOGIN_SUCCESS: {
             return {
                 ...state,
+                name: action.payload.name,
+                email: action.payload.email,
                 loginRequst: false,
                 loginFailed: false,
                 loginSuccess: true,

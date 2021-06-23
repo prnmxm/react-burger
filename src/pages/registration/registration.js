@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import {registerUser} from '../../services/actions/user'
 import React from 'react'
 import { useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 export default function Registration () {
     const [value, setValue] = React.useState({
         email: '',
@@ -20,6 +21,17 @@ export default function Registration () {
     const submit = (e) => {
         e.preventDefault();
         dispatch(registerUser(value));
+    }
+    const hasToken = localStorage.getItem('refreshToken')
+
+    if (hasToken) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/'
+          }}
+        />
+      );
     }
     return (
         <div className={styles.container}>

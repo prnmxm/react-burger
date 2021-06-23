@@ -3,7 +3,7 @@ import styles from './forgot.module.scss'
 import { Link, useHistory } from "react-router-dom";
 import {forgotPassword} from '../../services/actions/user'
 import { useDispatch } from 'react-redux';
-
+import { Redirect } from 'react-router-dom';
 import React from 'react'
 export default function Forgot () {
     const history = useHistory();
@@ -20,6 +20,17 @@ export default function Forgot () {
     const submit = (e) => {
         e.preventDefault();
         dispatch(forgotPassword(value));
+    }
+    const hasToken = localStorage.getItem('refreshToken')
+
+    if (hasToken) {
+      return (
+        <Redirect
+          to={{
+            pathname: '/'
+          }}
+        />
+      );
     }
     return (
         <div className={styles.container}>
