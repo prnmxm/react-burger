@@ -42,6 +42,9 @@ export const registerUser = (value) => (dispatch) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         body: JSON.stringify(value)
     }).then( e => {
         if(e.ok) {
@@ -75,6 +78,9 @@ export const forgotPassword = (value) => (dispatch) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         body: JSON.stringify(value)
     }).then( e => {
         if(e.ok) {
@@ -102,6 +108,9 @@ export const resetPassword = (value) => (dispatch) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         body: JSON.stringify(value)
     }).then( e => {
         if(e.ok) {
@@ -126,10 +135,12 @@ export const logoutUser = (value) => (dispatch) => {
     });
     fetch('https://norma.nomoreparties.space/api/auth/logout', {
         method: 'POST',
-    mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
     }).then( e => {
         if(e.ok) {
@@ -158,6 +169,9 @@ export const loginUser = (value) => (dispatch) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         body: JSON.stringify(value)
     }).then( e => {
         if(e.ok) {
@@ -185,6 +199,9 @@ export const refreshToken = (value) => (dispatch) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
     }).then( e => {
         if(e.ok) {
@@ -215,6 +232,9 @@ export const userData = (value) => (dispatch) => {
         headers: {
           'Content-Type': 'application/json',
         },
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         body: JSON.stringify(value)
     }).then( e => {
         if(e.ok) {
