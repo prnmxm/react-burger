@@ -2,10 +2,12 @@ import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-develope
 import styles from './forgot.module.scss'
 import { Link, useHistory } from "react-router-dom";
 import {forgotPassword} from '../../services/actions/user'
+import { useDispatch } from 'react-redux';
 
 import React from 'react'
 export default function Forgot () {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [value, setValue] = React.useState({
         email: '',
     })

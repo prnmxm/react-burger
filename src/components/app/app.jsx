@@ -3,13 +3,13 @@ import { Modal } from '../modal';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useSelector, shallowEqual } from 'react-redux';
 import {Main, Login, Registration, ForgotPassword, ResetPassword, Feed, Profile, OrderDetails} from '../../pages'
+import {ProtectedRoute} from '../protected-route'
 function App () {
     const {isOpen} = useSelector(store => ({
         isOpen: store.modal.isOpen
     }), shallowEqual)
     return (
         <>
-        <Router>
         <AppHeader /> 
         <Switch>
             <Route path="/" exact={true}>
@@ -33,14 +33,13 @@ function App () {
             <Route path="/feed/:id" exact={true}>
                 <OrderDetails/>
             </Route>
-            <Route path="/profile">
+            <ProtectedRoute path="/profile">
                 <Profile/>
-            </Route>
+            </ProtectedRoute>
             <Route>
                     <h1> 404 </h1>
             </Route>
         </Switch>
-        </Router>
         {isOpen && <Modal/>}
         </>
     )

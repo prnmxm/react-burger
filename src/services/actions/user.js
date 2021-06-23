@@ -1,7 +1,7 @@
-import {setCookie, getCookie} from '../../utils/fn'
-export const REGISTER_REQUEST = "GET_REGISTER_REQUEST"
-export const REGISTER_SUCCESS = "GET_REGISTER_SUCCES"
-export const REGISTER_FAILED = "GET_REGISTER_FAILED"
+import {setCookie, getCookie, deleteCookie} from '../../utils/fn'
+export const REGISTER_REQUEST = "REGISTER_REQUEST"
+export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
+export const REGISTER_FAILED = "REGISTER_FAILED"
 
 export const FORGOT_REQUEST = "FORGOT_REQUEST"
 export const FORGOT_SUCCESS = "FORGOT_SUCCESS"
@@ -54,8 +54,8 @@ export const registerUser = (value) => (dispatch) => {
             setCookie('token', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
             dispatch({
-                type: REGISTER_SUCCES,
-                payload: res.user,
+                type: REGISTER_SUCCESS,
+                payload: e.user,
             });
             dispatch(push('/'));
             
@@ -84,9 +84,8 @@ export const forgotPassword = (value) => (dispatch) => {
     }).then( e => {
         dispatch({
             type: FORGOT_SUCCESS,
-            // payload: res.user,
         });
-        dispatch(push('/'));
+        dispatch(push('/reset-password'));
     }).catch( e => {
         dispatch({
             type: FORGOT_FAILED,
@@ -112,9 +111,8 @@ export const resetPassword = (value) => (dispatch) => {
     }).then( e => {
         dispatch({
             type: RESET_SUCCESS,
-            // payload: res.user,
         });
-        dispatch(push('/'));
+        dispatch(push('/login'));
     }).catch( e => {
         dispatch({
             type: RESET_FAILED,
@@ -128,21 +126,23 @@ export const logoutUser = (value) => (dispatch) => {
     });
     fetch('https://norma.nomoreparties.space/api/auth/logout', {
         method: 'POST',
+    mode: 'cors',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(value)
+        body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
     }).then( e => {
         if(e.ok) {
             return e.json();
         }
         return Promise.reject(e)
     }).then( e => {
+        deleteCookie('token');
+        localStorage.removeItem('refreshToken');
         dispatch({
             type: LOGOUT_SUCCESS,
-            // payload: res.user,
         });
-        dispatch(push('/'));
+        dispatch(push('/login'));
     }).catch( e => {
         dispatch({
             type: LOGOUT_FAILED,
@@ -185,18 +185,20 @@ export const refreshToken = (value) => (dispatch) => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(value)
+        body: JSON.stringify({ token: localStorage.getItem('refreshToken') }),
     }).then( e => {
         if(e.ok) {
             return e.json();
         }
         return Promise.reject(e)
     }).then( e => {
+        const accessToken = e.accessToken.split('Bearer ')[1];
+        const refreshToken = e.refreshToken;
+        setCookie('token', accessToken);
+        localStorage.setItem('refreshToken', refreshToken);
         dispatch({
             type: REFRESH_SUCCESS,
-            // payload: res.user,
         });
-        dispatch(push('/'));
     }).catch( e => {
         dispatch({
             type: REFRESH_FAILED,
@@ -222,9 +224,8 @@ export const userData = (value) => (dispatch) => {
     }).then( e => {
         dispatch({
             type: USERDATA_SUCCESS,
-            // payload: res.user,
+            payload: e.user,
         });
-        dispatch(push('/'));
     }).catch( e => {
         dispatch({
             type: USERDATA_FAILED,
@@ -237,10 +238,16 @@ export const userDataUpdate = (value) => (dispatch) => {
         type: USERDATAUPDATE_REQUEST,
     });
     fetch('https://norma.nomoreparties.space/api/auth/user', {
-        method: 'PATH',
+        method: 'PATCH',
+        mode: 'cors',
+        cache: 'no-cache',
+        credentials: 'same-origin',
         headers: {
           'Content-Type': 'application/json',
+          Authorization: 'Bearer ' + getCookie('token'),
         },
+        redirect: 'follow',
+        referrerPolicy: 'no-referrer',
         body: JSON.stringify(value)
     }).then( e => {
         if(e.ok) {
@@ -250,9 +257,8 @@ export const userDataUpdate = (value) => (dispatch) => {
     }).then( e => {
         dispatch({
             type: USERDATAUPDATE_SUCCESS,
-            // payload: res.user,
+            payload: e.user,
         });
-        dispatch(push('/'));
     }).catch( e => {
         dispatch({
             type: USERDATAUPDATE_FAILED,

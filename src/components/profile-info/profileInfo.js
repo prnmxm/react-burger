@@ -1,9 +1,13 @@
 import styles from './profileInfo.module.scss'
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import React from 'react'
+import {userDataUpdate} from '../../services/actions/user'
+import { useDispatch } from 'react-redux';
+
 export default function ProfileInfo () {
+    const dispatch = useDispatch();
     const [value, setValue] = React.useState({
-        mail: '',
+        email: '',
         password: '',
         name: ''
     })
@@ -16,14 +20,18 @@ export default function ProfileInfo () {
     const cancel = (e) => {
         e.preventDefault();
         setValue({
-            mail: '',
+            email: '',
             password: '',
             name: ''
         })
     }
+    const submit = (e) => {
+        e.preventDefault();
+        dispatch(userDataUpdate(value));
+    }
     return (
         <div>
-            <form className={styles.form}>
+            <form className={styles.form} onSubmit={submit}>
                 <div className={styles.input}> 
                     <Input
                         onChange={setValueInput}
@@ -38,8 +46,8 @@ export default function ProfileInfo () {
                     <Input
                         onChange={setValueInput}
                         type={'text'}
-                        value={value.mail}
-                        name={'mail'}
+                        value={value.email}
+                        name={'email'}
                         size={'default'}
                         placeholder={'e-mail'}
                     />
@@ -53,11 +61,11 @@ export default function ProfileInfo () {
                         placeholder={'password'}
                     />
                 </div>
-                {value.mail && value.name && value.password && (
+                {value.email && value.name && value.password && (
                     <>
                     <a className={styles.cancel} onClick={cancel}>Отменить</a>
                     <Button type="primary" size="medium">
-                    Зарегистрироваться
+                    Обновить
                     </Button>
                     </>
                 )}

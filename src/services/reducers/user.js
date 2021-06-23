@@ -68,6 +68,7 @@ const initialState = {
     loginRequst: false,
     loginFailed: false,
     loginSuccess: false,
+
 }
 
 export const userReducer = (state = initialState, action) => {
@@ -83,6 +84,8 @@ export const userReducer = (state = initialState, action) => {
         case REGISTER_SUCCESS: {
             return {
                 ...state,
+                name: action.payload.name,
+                email: action.payload.email,
                 registerRequst: false,
                 regitsterFailed: false,
                 registerSuccess: true,
@@ -203,6 +206,8 @@ export const userReducer = (state = initialState, action) => {
         case USERDATA_SUCCESS: {
             return {
                 ...state,
+                name: action.payload.name,
+                email: action.payload.email,
                 userdataRequst: false,
                 userdataFailed: false,
                 userdataSuccess: true,
@@ -227,6 +232,8 @@ export const userReducer = (state = initialState, action) => {
         case USERDATAUPDATE_SUCCESS: {
             return {
                 ...state,
+                name: action.payload.name,
+                email: action.payload.email,
                 userdataupdateRequst: false,
                 userdataupdateFailed: false,
                 userdataupdateSuccess: true,

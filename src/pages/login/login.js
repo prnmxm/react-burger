@@ -2,10 +2,12 @@ import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-develope
 import styles from './login.module.scss'
 import { Link, useHistory } from "react-router-dom";
 import {loginUser} from '../../services/actions/user'
+import { useDispatch } from 'react-redux';
 
 import React from 'react'
 export default function Login () {
     const history = useHistory();
+    const dispatch = useDispatch();
     const [value, setValue] = React.useState({
         email: '',
         password: ''

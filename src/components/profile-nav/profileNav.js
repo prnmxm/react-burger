@@ -1,6 +1,13 @@
 import styles from './profileNav.module.scss'
 import { NavLink } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import {logoutUser} from '../../services/actions/user'
 export default function ProfileNav () {
+    const dispatch = useDispatch();
+    const logout = (e) => {
+        e.preventDefault()
+        dispatch(logoutUser());
+      };
     return (
     <ul className={styles.container}>
         <li>
@@ -10,7 +17,7 @@ export default function ProfileNav () {
             <NavLink to="/profile/orders" className={`text text_type_main-default text_color_inactive ${styles.link}`} activeClassName={styles.active} exact={true}>История заказов</NavLink>
         </li>
         <li>
-            <NavLink to="/" className={`text text_type_main-default text_color_inactive ${styles.link}`} activeClassName={styles.active} exact={true}>Выход</NavLink>
+            <a onClick={logout} className={`text text_type_main-default text_color_inactive ${styles.link}`} style={{cursor:'pointer'}}>Выход</a>
         </li>
     </ul>
     )
