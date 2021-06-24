@@ -1,12 +1,15 @@
 import styles from './orderFeedItem.module.scss'
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import {Link, useRouteMatch} from 'react-router-dom'
-export default function OrderFeedItem ({path}) {
+import {useDispatch} from 'react-redux';
+import {Link, useRouteMatch, useLocation} from 'react-router-dom'
+
+export default function OrderFeedItem ({path, id}) {
     const items = [1,2,3,4,5,6,7,8,9,10];
     const [itemsDisplay, itemsOther] = [items.splice(0,5), items];
+    const dispatch = useDispatch();
     let left = 0;
     return (
-        <Link to={`${path}`} className={styles.container}>
+        <Link to={path} className={styles.container}>
             <div className={styles.header}>
                 <p className="text text_type_digits-default">#034535</p>
                 <p className="text text_type_main-default text_color_inactive">
