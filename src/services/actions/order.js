@@ -40,7 +40,6 @@ export const getOrder = (ingredients) => (dispatch) => {
             type: INGREDIENTS_SELECTED_CLEAR
         })
     }).catch(e => {
-        console.log(e);
         dispatch({
             type: GET_ORDER_FAILED
         })
