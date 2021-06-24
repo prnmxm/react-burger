@@ -222,6 +222,8 @@ export const refreshToken = (value) => (dispatch) => {
             type: REFRESH_SUCCESS,
         });
     }).catch( e => {
+        deleteCookie('token');
+        localStorage.removeItem('refreshToken');
         dispatch({
             type: REFRESH_FAILED,
         });

@@ -10,7 +10,14 @@ export const getIngredients = () => (dispatch) => {
     dispatch({
         type: GET_INGREDIENTS_REQUEST,
     })
-    fetch(apiUrl)
+    fetch(apiUrl, {
+        headers: {
+            'Content-Type': 'application/json',
+          },
+          mode: 'cors',
+          cache: 'no-cache',
+          credentials: 'same-origin',
+    })
     .then(e=> {
         if(e.ok) {
             return e.json();
