@@ -160,7 +160,7 @@ export const logoutUser = (value) => (dispatch) => {
         });
     })
 }
-export const loginUser = (value) => (dispatch) => {
+export const loginUser = ({value, path}) => (dispatch) => {
     dispatch({
         type: LOGOUT_REQUEST,
     });
@@ -187,7 +187,7 @@ export const loginUser = (value) => (dispatch) => {
             type: LOGIN_SUCCESS,
             payload: e.user,
         });
-        dispatch('/');
+        dispatch(push(path));
     }).catch( e => {
         console.log(e);
         dispatch({

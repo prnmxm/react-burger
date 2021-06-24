@@ -1,12 +1,14 @@
+import {useEffect} from 'react'
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login.module.scss'
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory,useLocation } from "react-router-dom";
 import {loginUser} from '../../services/actions/user'
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
 import React from 'react'
 export default function Login () {
+  const { state } = useLocation();
     const history = useHistory();
     const dispatch = useDispatch();
     const [value, setValue] = React.useState({
@@ -20,17 +22,17 @@ export default function Login () {
         [e.target.name]: e.target.value
       }))
     }
+    const path =  state?.from.pathname || '/';
     const submit = (e) => {
         e.preventDefault();
-        dispatch(loginUser(value));
+        dispatch(loginUser({value, path}));
     }
     if (hasToken) {
-        return (
-          <Redirect
-            to={ '/' }
-          />
-        );
-      }
+      return (<Redirect
+        to={ state?.from || '/' }
+      />)
+    }
+
     return (
         <div className={styles.container}>
             <div className={styles.logo}><Logo /></div>
