@@ -189,7 +189,6 @@ export const loginUser = ({value, path}) => (dispatch) => {
         });
         dispatch(push(path));
     }).catch( e => {
-        console.log(e);
         dispatch({
             type: LOGIN_FAILED,
         });
@@ -245,10 +244,7 @@ export const userData = (value) => (dispatch) => {
         credentials: 'same-origin',
     
     }).then( e => {
-        if(e.ok) {
-            return e.json();
-        }
-        return Promise.reject(e)
+        return e.ok ? e.json() : e.json().then((err) => Promise.reject(err));
     }).then( e => {
         dispatch({
             type: USERDATA_SUCCESS,
@@ -258,6 +254,9 @@ export const userData = (value) => (dispatch) => {
         dispatch({
             type: USERDATA_FAILED,
         });
+        if (err.message === 'jwt expired') {
+            refreshToken()
+        }
     })
 }
 
@@ -278,10 +277,7 @@ export const userDataUpdate = (value) => (dispatch) => {
         referrerPolicy: 'no-referrer',
         body: JSON.stringify(value)
     }).then( e => {
-        if(e.ok) {
-            return e.json();
-        }
-        return Promise.reject(e)
+        return e.ok ? e.json() : e.json().then((err) => Promise.reject(err));
     }).then( e => {
         dispatch({
             type: USERDATAUPDATE_SUCCESS,
@@ -291,5 +287,8 @@ export const userDataUpdate = (value) => (dispatch) => {
         dispatch({
             type: USERDATAUPDATE_FAILED,
         });
+        if (err.message === 'jwt expired') {
+            refreshToken()
+        }
     })
 }
