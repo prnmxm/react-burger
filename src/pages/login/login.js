@@ -2,7 +2,8 @@ import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-develope
 import styles from './login.module.scss'
 import { Link, useHistory } from "react-router-dom";
 import {loginUser} from '../../services/actions/user'
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import React from 'react'
 export default function Login () {
@@ -12,6 +13,7 @@ export default function Login () {
         email: '',
         password: ''
     })
+    const hasToken = localStorage.getItem('refreshToken')
     const setValueInput = (e) => {
       setValue((prev) => ({
         ...prev,
@@ -22,6 +24,13 @@ export default function Login () {
         e.preventDefault();
         dispatch(loginUser(value));
     }
+    if (hasToken) {
+        return (
+          <Redirect
+            to={ '/' }
+          />
+        );
+      }
     return (
         <div className={styles.container}>
             <div className={styles.logo}><Logo /></div>

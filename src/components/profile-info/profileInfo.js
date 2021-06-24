@@ -13,7 +13,7 @@ export default function ProfileInfo () {
     }));
     useEffect(() => {
         dispatch(userData());
-      }, [dispatch]);
+      }, []);
 ;
     const [value, setValue] = React.useState({
         email: '',

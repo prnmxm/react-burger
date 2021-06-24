@@ -32,7 +32,6 @@ export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAILED = "LOGIN_FAILED"
 import { push } from 'connected-react-router';
 
-
 export const registerUser = (value) => (dispatch) => {
     dispatch({
         type: REGISTER_REQUEST,
@@ -188,8 +187,9 @@ export const loginUser = (value) => (dispatch) => {
             type: LOGIN_SUCCESS,
             payload: e.user,
         });
-        dispatch(push('/'));
+        dispatch('/');
     }).catch( e => {
+        console.log(e);
         dispatch({
             type: LOGIN_FAILED,
         });

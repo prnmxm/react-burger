@@ -32,6 +32,21 @@ export default function IngredientMain ({item}) {
                     />
             }
         })
+        dispatch({
+            type: OPEN_MODAL,
+            payload: {
+                title: 'Детали ингредиента',
+                content:  <IngredientDetails 
+                    image={item.image} 
+                    name={item.name} 
+                    desc={'Превосходное описание'} 
+                    calories={item.calories} 
+                    proteins={item.proteins} 
+                    fats={item.fat}
+                    carbohydrates={item.carbohydrates}
+                    />
+            }
+        }) 
     },[])
     return (
         <div className={`${style.block} mb-5`} onClick={()=>{
