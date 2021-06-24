@@ -41,9 +41,9 @@ export default function ProfileInfo () {
     const cancel = (e) => {
         e.preventDefault();
         setValue({
-            email: '',
+            email: currentE,
             password: '',
-            name: ''
+            name: currentN
         })
     }
     const submit = (e) => {

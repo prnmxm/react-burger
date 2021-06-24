@@ -6,6 +6,7 @@ import React from 'react'
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 export default function ResetPassword () {
+  const dispatch = useDispatch();
     const [value, setValue] = React.useState({
         password: '',
         token: '',
