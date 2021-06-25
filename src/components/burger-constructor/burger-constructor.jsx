@@ -4,20 +4,26 @@ import {IngredientsSelected} from '../ingredients-selected'
 import style from './burger-constructor.module.scss';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { getOrder } from '../../services/actions/order'
-
+import { push } from 'connected-react-router';
 function BurgerConstructor () {
     const dispatch = useDispatch();
+    const token = localStorage.getItem('refreshToken')
     const {selected, isDisabledOrder, items, orderRquest} = useSelector(store => ({
         selected: store.ingredients.selected,
         isDisabledOrder: store.ingredients.isDisabledOrder,
         items: store.ingredients.items,
         orderRquest: store.order.orderRquest
     }),shallowEqual)
-    const price = React.useMemo(()=>items.reduce((acc,cur) => {
-        return acc + cur.price * cur.count;
-    },0),[selected])
+    const price = selected.reduce((acc,cur) => {
+        return acc + cur.price;
+    },0)
     function click(e) {
-        dispatch(getOrder(selected.map( e => e._id)));
+        if (token) {
+            dispatch(getOrder(selected.map( e => e._id)));
+        } else {
+            dispatch(push('/login'));
+        }
+
     }
     return (
         <div className={style.container}>

@@ -1,9 +1,26 @@
 import style from './ingredient-details.module.scss'
 import PropTypes from 'prop-types'
-
-function IngredientDetails(props) {
+import { useSelector, shallowEqual } from 'react-redux';
+import {useParams} from 'react-router-dom'
+import {useDispatch} from 'react-redux';
+import { useEffect } from 'react';
+import { getIngredients } from '../../services/actions/ingredients';
+function IngredientDetails() {
+    const dispatch = useDispatch();
+    const {items, itemsLoaded} = useSelector(store => ({
+        items: store.ingredients.items,
+        itemsLoaded: store.ingredients.itemsLoaded
+    }), shallowEqual)
+    const {id} = useParams();
+    const props = items.find( e => e._id === id)
+    useEffect(() => {
+        if (!props) {
+            dispatch(getIngredients())
+        }
+    },[id, dispatch])
     return (
-        <div className={style.order}>
+        itemsLoaded && 
+ <div className={style.order}>
             <img src={props.image}/>
             <h3 className={style.title}>{props.name}</h3>
             <p className={style.desc + ' ' + "text text_type_main-default"}>{props.desc}</p>
@@ -41,7 +58,7 @@ function IngredientDetails(props) {
                     </span>
                 </div>
             </div>
-        </div>
+        </div> || ''
     )
 }
 IngredientDetails.propTypes = {

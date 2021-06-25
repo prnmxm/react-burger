@@ -5,9 +5,13 @@ import PropTypes from 'prop-types'
 import { IngredientDetails } from '../ingredient-details'
 import { useDrag } from "react-dnd";
 import { useDispatch } from 'react-redux';
+import {
+    Link, useLocation,
+  } from "react-router-dom";
 import { OPEN_MODAL } from '../../services/actions/modal';
 export default function IngredientMain ({item}) {
     const dispatch = useDispatch();
+    const location = useLocation();
     const [{isDrag},dragRef] = useDrag({
         type: 'product',
         item,
@@ -16,27 +20,12 @@ export default function IngredientMain ({item}) {
         })
 
     });
-    const showItem = React.useCallback((event) => {
-        dispatch({
-            type: OPEN_MODAL,
-            payload: {
-                title: 'Детали ингредиента',
-                content:  <IngredientDetails 
-                    image={item.image} 
-                    name={item.name} 
-                    desc={'Превосходное описание'} 
-                    calories={item.calories} 
-                    proteins={item.proteins} 
-                    fats={item.fat}
-                    carbohydrates={item.carbohydrates}
-                    />
-            }
-        })
-    },[])
     return (
-        <div className={`${style.block} mb-5`} onClick={()=>{
-            showItem();
-        }} ref={dragRef}>
+        <Link to={{
+            pathname: `/ingredients/${item._id}`,
+            state: { background: location }
+          }} className={style.link}>
+        <div className={`${style.block} mb-5`} ref={dragRef}>
             <picture className={style.image}>
                 <source srcSet={item.image} media="(min-width: 1200px)"/>
                 <source srcSet={item.image_large} media="(min-width: 640px)"/>
@@ -47,6 +36,7 @@ export default function IngredientMain ({item}) {
             <span className={`text text_type_digits-small ${style.price}`}>{item.price} <CurrencyIcon type="primary" /></span>
             <p className={`text text_type_main-default ${style.title}`}>{item.name}</p>
         </div>
+        </Link>
     )
 } 
 IngredientMain.propTypes = {

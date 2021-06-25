@@ -7,7 +7,7 @@ import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_MODAL } from '../../services/actions/modal';
 
-function Modal() {
+function Modal(props) {
     const dispatch = useDispatch();
     const {title, content} = useSelector( store => ({
         title: store.modal.title,
@@ -39,13 +39,13 @@ function Modal() {
                         {   title &&
                             <h3 className={'text text_type_main-medium ' + style.title}>{title}</h3>
                         }
-                        <div className={style.iconClose} onClick={close}><CloseIcon/></div>
+                        <div className={style.iconClose} onClick={props.close || close}><CloseIcon/></div>
                     </div>
                     <div className={style.body}>
-                        {content}
+                        {content || props.children}
                     </div>
                 </div>
-                <ModalOverlay close={close}/>
+                <ModalOverlay close={props.close || close}/>
             </>
         ),
         modalRoot
