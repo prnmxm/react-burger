@@ -1,32 +1,46 @@
 import { AppHeader } from '../app-header'
-import { BurgerConstructor } from '../burger-constructor'
-import { BurgerIngredients } from '../burger-ingredients'
-import React from 'react';
-import style from './app.module.scss';
 import { Modal } from '../modal';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
-import { getIngredients } from '../../services/actions/ingredients'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useSelector, shallowEqual } from 'react-redux';
+import {Main, Login, Registration, ForgotPassword, ResetPassword, Feed, Profile, OrderDetails} from '../../pages'
 function App () {
-    const dispatch = useDispatch();
-    const {itemsLoaded, itemsError, isOpen} = useSelector(store => ({
-        itemsLoaded: store.ingredients.itemsLoaded,
-        itemsError: store.ingredients.itemsError,
+    const {isOpen} = useSelector(store => ({
         isOpen: store.modal.isOpen
     }), shallowEqual)
-    React.useEffect(() => {
-        dispatch(getIngredients());
-    }, [dispatch])
     return (
         <>
+        <Router>
         <AppHeader /> 
-        {itemsLoaded && !itemsError && <main className={`pt-5 ${style.container}`}>
-        <DndProvider backend={HTML5Backend}>
-            <BurgerIngredients/> 
-            <BurgerConstructor/>
-        </DndProvider>
-        </main>}
+        <Switch>
+            <Route path="/" exact={true}>
+                <Main/>
+            </Route>
+            <Route path="/login" exact={true}>
+                <Login/>
+            </Route>
+            <Route path="/register" exact={true}>
+                <Registration/>
+            </Route>
+            <Route path="/forgot-password" exact={true}>
+                <ForgotPassword/>
+            </Route>
+            <Route path="/reset-password" exact={true}>
+                <ResetPassword/>
+            </Route>
+            <Route path="/feed" exact={true}>
+                <Feed/>
+            </Route>
+            <Route path="/feed/:id" exact={true}>
+                <OrderDetails/>
+            </Route>
+            <Route path="/profile">
+                <Profile/>
+            </Route>
+            <Route>
+                    <h1> 404 </h1>
+            </Route>
+        </Switch>
+        </Router>
         {isOpen && <Modal/>}
         </>
     )
