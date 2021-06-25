@@ -103,7 +103,7 @@ export const resetPassword = (value) => (dispatch) => {
     dispatch({
         type: RESET_REQUEST,
     });
-    fetch('https://norma.nomoreparties.space/api/password-reset', {
+    fetch('https://norma.nomoreparties.space/api/password-reset/reset', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
