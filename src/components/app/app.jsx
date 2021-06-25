@@ -1,46 +1,32 @@
 import { AppHeader } from '../app-header'
+import { BurgerConstructor } from '../burger-constructor'
+import { BurgerIngredients } from '../burger-ingredients'
+import React from 'react';
+import style from './app.module.scss';
 import { Modal } from '../modal';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import { useSelector, shallowEqual } from 'react-redux';
-import {Main, Login, Registration, ForgotPassword, ResetPassword, Feed, Profile, OrderDetails} from '../../pages'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { DndProvider } from 'react-dnd'
+import { HTML5Backend } from 'react-dnd-html5-backend'
+import { getIngredients } from '../../services/actions/ingredients'
 function App () {
-    const {isOpen} = useSelector(store => ({
+    const dispatch = useDispatch();
+    const {itemsLoaded, itemsError, isOpen} = useSelector(store => ({
+        itemsLoaded: store.ingredients.itemsLoaded,
+        itemsError: store.ingredients.itemsError,
         isOpen: store.modal.isOpen
     }), shallowEqual)
+    React.useEffect(() => {
+        dispatch(getIngredients());
+    }, [dispatch])
     return (
         <>
-        <Router>
         <AppHeader /> 
-        <Switch>
-            <Route path="/" exact={true}>
-                <Main/>
-            </Route>
-            <Route path="/login" exact={true}>
-                <Login/>
-            </Route>
-            <Route path="/register" exact={true}>
-                <Registration/>
-            </Route>
-            <Route path="/forgot-password" exact={true}>
-                <ForgotPassword/>
-            </Route>
-            <Route path="/reset-password" exact={true}>
-                <ResetPassword/>
-            </Route>
-            <Route path="/feed" exact={true}>
-                <Feed/>
-            </Route>
-            <Route path="/feed/:id" exact={true}>
-                <OrderDetails/>
-            </Route>
-            <Route path="/profile">
-                <Profile/>
-            </Route>
-            <Route>
-                    <h1> 404 </h1>
-            </Route>
-        </Switch>
-        </Router>
+        {itemsLoaded && !itemsError && <main className={`pt-5 ${style.container}`}>
+        <DndProvider backend={HTML5Backend}>
+            <BurgerIngredients/> 
+            <BurgerConstructor/>
+        </DndProvider>
+        </main>}
         {isOpen && <Modal/>}
         </>
     )
