@@ -8,9 +8,7 @@ import { useDispatch } from 'react-redux';
 import {
     Link, useLocation,
   } from "react-router-dom";
-import { OPEN_MODAL } from '../../services/actions/modal';
 export default function IngredientMain ({item}) {
-    const dispatch = useDispatch();
     const location = useLocation();
     const [{isDrag},dragRef] = useDrag({
         type: 'product',
@@ -25,7 +23,7 @@ export default function IngredientMain ({item}) {
             pathname: `/ingredients/${item._id}`,
             state: { background: location }
           }} className={style.link}>
-        <div className={`${style.block} mb-5`} ref={dragRef}>
+        <div className={`${style.block} mb-5`} ref={dragRef} data-test="product" data-type={item.type === 'bun' && 'bun' || 'main'}>
             <picture className={style.image}>
                 <source srcSet={item.image} media="(min-width: 1200px)"/>
                 <source srcSet={item.image_large} media="(min-width: 640px)"/>

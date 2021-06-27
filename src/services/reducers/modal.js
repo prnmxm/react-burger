@@ -1,6 +1,6 @@
 import {OPEN_MODAL, CLOSE_MODAL} from '../actions/modal';
 
-const initialState = {
+export const initialState = {
     isOpen: false,
     content: null,
     title: ''
@@ -16,6 +16,7 @@ export const modalReducer = ( state = initialState , action ) => {
         }
         case CLOSE_MODAL: {
             return {
+                ...state,
                 isOpen: false,
                 content: null,
             }

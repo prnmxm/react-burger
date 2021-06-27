@@ -28,7 +28,7 @@ export default function IngredientsSelected ({items}) {
         return [itemBun, itemsOther]
     }, [items])
     return (
-        <div className={style.container} ref={dropTarget}>
+        <div className={style.container} ref={dropTarget} data-test='selected-items'>
             {itemBun && 
             <IngredientSelected item={{...itemBun, name: itemBun.name + ' (Верх)'}} styleClass={'first'} lock={true}/> 
             || <IngredientsEmpty>Булка</IngredientsEmpty>}

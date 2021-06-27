@@ -55,7 +55,7 @@ export default function IngredientSelected ({item, styleClass, lock}) {
     const opacity = isDrag ? 0 : 1;
     drag(drop(ref));
     return (
-        <div className={`${style.item} ${styleClass ? style[styleClass] : ''}`}  {...(!lock && {ref:ref})}style={{opacity}} >
+        <div className={`${style.item} ${styleClass ? style[styleClass] : ''}`}  {...(!lock && {ref:ref})}style={{opacity}} data-type={item.type === 'bun' && 'bun' || 'main'} data-test='product'>
             {
                 !styleClass &&
                 <div className={style.dragdrop}><DragIcon type="primary" /></div>
@@ -67,7 +67,7 @@ export default function IngredientSelected ({item, styleClass, lock}) {
                 styleClass ?
                 <LockIcon type="secondary" />
                 :
-                <div className={style.remove} onClick={remove}><DeleteIcon type="primary" /></div>
+                <div className={style.remove} onClick={remove} data-test="remove"><DeleteIcon type="primary" /></div>
             }
         </div>
     )
