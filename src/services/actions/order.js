@@ -1,7 +1,7 @@
 import { OrderDetails } from "../../components/order-details"
 import { INGREDIENTS_SELECTED_CLEAR } from "./ingredients"
 import { OPEN_MODAL } from "./modal"
-
+import { getCookie } from '../../utils/fn'
 export const GET_ORDER_REQUEST = "GET_ORDER_REQUEST"
 export const GET_ORDER_SUCCES = "GET_ORDER_SUCCES"
 export const GET_ORDER_FAILED = "GET_ORDER_FAILED"
@@ -13,7 +13,8 @@ export const getOrder = (ingredients) => (dispatch) => {
     fetch('https://norma.nomoreparties.space/api/orders', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + getCookie('token'),
         },
         body: JSON.stringify({ingredients})
     })
