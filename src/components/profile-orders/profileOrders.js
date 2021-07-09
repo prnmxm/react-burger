@@ -21,7 +21,6 @@ export default function ProfileOrders () {
         },
         [dispatch]
     );
-    console.log(123);
     React.useEffect(() => {
         dispatch(getIngredients());
     }, [dispatch])
