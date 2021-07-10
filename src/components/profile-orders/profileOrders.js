@@ -21,9 +21,7 @@ export default function ProfileOrders () {
         },
         [dispatch]
     );
-    React.useEffect(() => {
-        dispatch(getIngredients());
-    }, [dispatch])
+
     const {orders} = orders1
     return ( items.length !== 0 && orders && orders.length !== 0 ? 
     <div className={styles.orderFeed}>

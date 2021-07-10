@@ -2,6 +2,7 @@ import styles from './orderFeedItem.module.scss'
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import {Link, useRouteMatch, useLocation} from 'react-router-dom'
+import {conversionDateForCard} from '../../utils/fn'
 
 export default function OrderFeedItem ({path, id, data}) {
     const {items} = useSelector(store => ({
@@ -21,7 +22,7 @@ export default function OrderFeedItem ({path, id, data}) {
             <div className={styles.header}>
                 <p className="text text_type_digits-default">#{data.number}</p>
                 <p className="text text_type_main-default text_color_inactive">
-                {data.createdAt}
+                {conversionDateForCard(data.createdAt)}
                 </p>
             </div>
             <div className={styles.body}>

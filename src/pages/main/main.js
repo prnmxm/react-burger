@@ -12,9 +12,6 @@ export default function Main () {
         itemsLoaded: store.ingredients.itemsLoaded,
         itemsError: store.ingredients.itemsError,
     }), shallowEqual)
-    React.useEffect(() => {
-        dispatch(getIngredients());
-    }, [dispatch])
     return (
         <>
         {itemsLoaded && !itemsError && <main className={`pt-5 ${style.container}`}>     

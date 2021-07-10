@@ -4,7 +4,6 @@ import { OrderFeed } from '../../components/orderFeed'
 import styles from './feed.module.scss'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux';
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../services/actions/ws'
-import { getIngredients } from '../../services/actions/ingredients'
 export default function Feed () {
   const {items} = useSelector(store => ({
     items: store.ingredients.items,
@@ -17,9 +16,6 @@ export default function Feed () {
       },
       [dispatch]
     );
-    React.useEffect(() => {
-      dispatch(getIngredients());
-    }, [dispatch])
     return (
         items.length !== 0 ? <div className={styles.container}>
             <h1 className="text text_type_main-medium mb-4">Лента заказов</h1>
