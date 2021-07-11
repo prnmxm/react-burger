@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { AppHeader } from '../app-header'
 import { Modal } from '../modal';
 import { BrowserRouter as Router, Switch, Route, useHistory,
@@ -7,6 +8,7 @@ import {Main, Login, Registration, ForgotPassword, ResetPassword, Feed, Profile,
 import {ProtectedRoute} from '../protected-route'
 import { IngredientDetails } from '../ingredient-details';
 import { push } from 'connected-react-router';
+import { getIngredients } from '../../services/actions/ingredients'
 import { useDispatch } from 'react-redux';
 function App () {
     const location = useLocation();
@@ -16,6 +18,9 @@ function App () {
     const {isOpen} = useSelector(store => ({
         isOpen: store.modal.isOpen
     }), shallowEqual)
+    React.useEffect(() => {
+        dispatch(getIngredients());
+    }, [dispatch])
     return (
         <>
         <AppHeader /> 
