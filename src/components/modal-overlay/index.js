@@ -1,2 +1,2 @@
-import ModalOverlay from './modal-overlay.jsx'
+import ModalOverlay from './modal-overlay.tsx'
 export { ModalOverlay }
