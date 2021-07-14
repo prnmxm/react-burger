@@ -3,19 +3,19 @@ import { AppHeader } from '../app-header'
 import { Modal } from '../modal';
 import { Switch, Route, useHistory,
 	useLocation } from 'react-router-dom';
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import {Main, Login, Registration, ForgotPassword, ResetPassword, Feed, Profile, OrderDetails} from '../../pages'
 import {ProtectedRoute} from '../protected-route'
 import { IngredientDetails } from '../ingredient-details';
 import { push } from 'connected-react-router';
 import { getIngredients } from '../../services/actions/ingredients'
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
 function App () {
     const location: any = useLocation();
 	const history = useHistory();
     const dispatch = useDispatch();
 	const background = (history.action === 'PUSH' || history.action === 'REPLACE') && location.state && location.state.background;
-    const {isOpen} = useSelector((store: any) => ({
+    const {isOpen} = useSelector((store) => ({
         isOpen: store.modal.isOpen
     }), shallowEqual)
     React.useEffect(() => {

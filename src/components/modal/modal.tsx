@@ -3,8 +3,9 @@ import React from 'react';
 import style from './modal.module.scss' 
 import {ModalOverlay} from '../modal-overlay'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
-import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_MODAL } from '../../services/actions/modal';
+import { useSelector, useDispatch } from '../../hooks';
+
 const modalRoot = document.querySelector('#modal');
 type TModalProps = {
     children: React.ReactNode;
@@ -12,7 +13,7 @@ type TModalProps = {
 } 
 function Modal(props:TModalProps) {
     const dispatch = useDispatch();
-    const {title, content} = useSelector( (store:any) => ({
+    const {title, content} = useSelector( (store) => ({
         title: store.modal.title,
         content: store.modal.content
     }))
@@ -41,7 +42,7 @@ function Modal(props:TModalProps) {
                         {   title &&
                             <h3 className={'text text_type_main-medium ' + style.title}>{title}</h3>
                         }
-                        <div className={style.iconClose} onClick={props.close || close}><CloseIcon type={'secondary'} onClick={()=>{console.log('close')}}/></div>
+                        <div className={style.iconClose} onClick={props.close || close}><CloseIcon type={'secondary'} /></div>
                     </div>
                     <div className={style.body}>
                         {content || props.children}

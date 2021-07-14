@@ -1,24 +1,26 @@
 import styles from './orderFeedItem.module.scss'
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
-import {useDispatch, useSelector, shallowEqual} from 'react-redux';
+import { shallowEqual} from 'react-redux';
 import {Link, useRouteMatch, useLocation} from 'react-router-dom'
 import {conversionDateForCard} from '../../utils/fn'
 import {TOrder} from '../../types'
 import {TIngredient} from '../../types'
+import { useSelector, useDispatch } from '../../hooks';
+
 type TOrderFeedItem = {
     path: any;
-    id: number;
+    id: number|string;
     data: TOrder;
 }
 export default function OrderFeedItem ({path, id, data}:TOrderFeedItem) {
-    const {items} = useSelector((store:any) => ({
+    const {items} = useSelector((store) => ({
         items: store.ingredients.items,
     }),shallowEqual)
     let left = 0;
-    const itemsDop = data.ingredients.map( (e:any) => {
-        return items.find( (a:any) => a._id === e)
+    const itemsDop = data.ingredients.map( (e) => {
+        return items.find( (a:TIngredient) => a._id === e)
     }) || []
-    const price = itemsDop?.reduce( (acc:any, cur:any) => {
+    const price = itemsDop?.reduce( (acc, cur) => {
         return acc + (cur?.price || 0)
     },0) || 0
     
@@ -36,7 +38,7 @@ export default function OrderFeedItem ({path, id, data}:TOrderFeedItem) {
                     {data.name}
                 </p>
                 <div className={styles.items}>
-                    {itemsDisplay.length !== 0 && itemsDisplay.map( (e:any, i:any, arr:any) => {
+                    {itemsDisplay.length !== 0 && itemsDisplay.map( (e, i, arr) => {
                         left = -((i) * 15);
                         return (
                             <div className={styles.item} key={i} style={{left, zIndex: arr.length - i}}>

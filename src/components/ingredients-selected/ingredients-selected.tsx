@@ -15,19 +15,19 @@ export default function IngredientsSelected ({items}:TIngredientSelected) {
     const dispatch = useDispatch();
     const [, dropTarget] = useDrop({
         accept: 'product',
-        drop(item) {
+        drop(item:TIngredient) {
             handleDrop(item)
         },
     });
-    const handleDrop = (item:any) => {
+    const handleDrop = (item:TIngredient) => {
         dispatch({
             type: INGREDIENTS_ADD,
             payload: {...item, customId: uuidv4()}
         })
     };
     const [itemBun, itemsOther] = React.useMemo(()=>{
-        const itemBun = items.find( (e:any) => e.type === 'bun');
-        const itemsOther = items.filter( (e:any) => e.type !== 'bun');
+        const itemBun = items.find( (e) => e.type === 'bun');
+        const itemsOther = items.filter( (e) => e.type !== 'bun');
         return [itemBun, itemsOther]
     }, [items])
     return (
@@ -37,7 +37,7 @@ export default function IngredientsSelected ({items}:TIngredientSelected) {
             || <IngredientsEmpty>Булка</IngredientsEmpty>}
             {itemsOther.length !== 0 &&
             <div className={style.containerScroll}> 
-                {itemsOther.map( (e:any, i:any) => (
+                {itemsOther.map( (e) => (
                     <IngredientSelected item={e} styleClass={'firsts'} key={e.customId} lock={false}/>
                 ))}
             </div>

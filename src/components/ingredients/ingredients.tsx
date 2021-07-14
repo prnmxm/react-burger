@@ -4,15 +4,17 @@ import style from './ingredients.module.scss'
 import PropTypes from 'prop-types'
 import { useRef } from 'react';
 import { SET_ACTIVE_TAB_SCROLL } from '../../services/actions/tabs'
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
-type Tingredient = {
-    items:any;
+import { shallowEqual } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
+import { TIngredientCat } from '../../types'
+type Tingredients = {
+    items: Array<TIngredientCat>;
     refsTabs: any;
 }
 
-export default function Ingredients ({items, refsTabs}:Tingredient) {
+export default function Ingredients ({items, refsTabs}:Tingredients) {
     const dispatch = useDispatch();
-    const {tabs} = useSelector((store:any) => ({
+    const {tabs} = useSelector((store) => ({
         tabs: store.tabs.tabs,
     }),shallowEqual)
     const containerRef = useRef(document.createElement("div"));
@@ -33,7 +35,7 @@ export default function Ingredients ({items, refsTabs}:Tingredient) {
     return (
         <div className={style.container} ref={containerRef} onScroll={checkElem}>
            { 
-                items.map( (e:any, i:any) => (
+                items.map( (e, i:number) => (
                     <div key={i} className={style.category} data-name={e.category} ref={el => refsTabs(el, e.category)}>
                         <h3 className={`text text_type_main-medium ${style.title} mb-3`}>
                             {e.category}

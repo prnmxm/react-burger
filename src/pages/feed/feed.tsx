@@ -2,10 +2,12 @@ import React, { useEffect } from 'react';
 import { FeedInfo } from '../../components/feed-info'
 import { OrderFeed } from '../../components/orderFeed'
 import styles from './feed.module.scss'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import { WS_CONNECTION_START, WS_CONNECTION_CLOSED } from '../../services/actions/ws'
+import { useSelector, useDispatch } from '../../hooks';
+
 export default function Feed () {
-  const {items} = useSelector((store: any) => ({
+  const {items} = useSelector((store) => ({
     items: store.ingredients.items,
 }),shallowEqual)
     const dispatch = useDispatch();

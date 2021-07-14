@@ -1,18 +1,20 @@
 import style from './ingredient-details.module.scss'
 import PropTypes from 'prop-types'
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import {useParams} from 'react-router-dom'
-import {useDispatch} from 'react-redux';
 import { useEffect } from 'react';
 import { getIngredients } from '../../services/actions/ingredients';
+import { useSelector, useDispatch } from '../../hooks';
+import { TIngredient } from '../../types'
+
 function IngredientDetails() {
     const dispatch = useDispatch();
-    const {items, itemsLoaded} = useSelector((store:any) => ({
+    const {items, itemsLoaded} = useSelector((store) => ({
         items: store.ingredients.items,
         itemsLoaded: store.ingredients.itemsLoaded
     }), shallowEqual)
     const {id} = useParams<{ id: string }>();
-    const props = items.find( (e:any) => e._id === id)
+    const props = items.find( (e:TIngredient) => e._id === id)
     useEffect(() => {
         if (!props) {
             dispatch(getIngredients())

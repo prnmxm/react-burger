@@ -8,7 +8,7 @@ type TIngredientCategory = {
 export const IngredientCategory = ({items}:TIngredientCategory) => {
     return (
         <div className={style.container}>
-            {items.map( (e:any) => (
+            {items.map( (e:TIngredient) => (
                 <IngredientMain item={e} key={e._id} />
             ))}
         </div>

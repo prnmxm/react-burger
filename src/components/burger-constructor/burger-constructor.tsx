@@ -1,13 +1,15 @@
 import { CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import {IngredientsSelected} from '../ingredients-selected'
 import style from './burger-constructor.module.scss';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { shallowEqual} from 'react-redux';
 import { getOrder } from '../../services/actions/order'
 import { push } from 'connected-react-router';
+import { useSelector, useDispatch } from '../../hooks';
+
 function BurgerConstructor () {
     const dispatch = useDispatch();
     const token = localStorage.getItem('refreshToken')
-    const {selected, isDisabledOrder} = useSelector((store: any) => ({
+    const {selected, isDisabledOrder} = useSelector((store) => ({
         selected: store.ingredients.selected,
         isDisabledOrder: store.ingredients.isDisabledOrder,
     }),shallowEqual)

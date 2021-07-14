@@ -1,6 +1,8 @@
 import style from './ingredients-empty.module.scss';
-
-export default function IngredientsEmpty(props:any) {
+type TIngredientsEmpty = {
+    children: React.ReactNode;
+}
+export default function IngredientsEmpty(props:TIngredientsEmpty) {
     return (
         <div className={style.place}>{props.children}</div>
     )
