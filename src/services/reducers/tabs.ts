@@ -1,10 +1,15 @@
-import { SET_ACTIVE_TAB_SCROLL, SET_ACTIVE_TAB_CLICK, ADD_ITEMS_TITLE, ADD_ITEMS_REF } from '../actions/tabs';
-const initialState = {
+import { SET_ACTIVE_TAB_SCROLL, SET_ACTIVE_TAB_CLICK, ADD_ITEMS_TITLE, ADD_ITEMS_REF, TTabsActions } from '../actions/tabs';
+type TTabsState = {
+    tabs: Array<any>,
+    active: string,
+    refs: Array<any>,
+};
+const initialState:TTabsState = {
     tabs: [],
     active: '',
     refs: [],
 };
-export const tabsReducer = ( state = initialState , action ) => {
+export const tabsReducer = ( state = initialState , action:TTabsActions ):TTabsState => {
     switch(action.type) {
         case SET_ACTIVE_TAB_SCROLL: {
             return {

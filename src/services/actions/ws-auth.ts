@@ -1,0 +1,42 @@
+export const WS_CONNECTION_AUTH_START = 'WS_CONNECTION_AUTH_START';
+export const WS_CONNECTION_AUTH_SUCCESS = 'WS_CONNECTION_AUTH_SUCCESS';
+export const WS_CONNECTION_AUTH_ERROR = 'WS_CONNECTION_AUTH_ERROR';
+export const WS_CONNECTION_AUTH_CLOSED = 'WS_CONNECTION_AUTH_CLOSED';
+export const WS_GET_MESSAGE_AUTH = 'WS_GET_MESSAGE_AUTH';
+export const WS_SEND_MESSAGE_AUTH = 'WS_SEND_MESSAGE_AUTH';
+
+export const wsActionsAuth = {
+	wsInit: WS_CONNECTION_AUTH_START,
+	onOpen: WS_CONNECTION_AUTH_SUCCESS,
+	onError: WS_CONNECTION_AUTH_ERROR,
+	onClose: WS_CONNECTION_AUTH_CLOSED,
+	onMessage: WS_GET_MESSAGE_AUTH,
+	wsSendMessage: WS_SEND_MESSAGE_AUTH,
+};
+export interface IWS_CONNECTION_AUTH_START {
+	readonly type: typeof WS_CONNECTION_AUTH_START;
+}
+export interface IWS_CONNECTION_AUTH_SUCCESS {
+	readonly type: typeof WS_CONNECTION_AUTH_SUCCESS;
+}
+export interface IWS_CONNECTION_AUTH_ERROR {
+	readonly type: typeof WS_CONNECTION_AUTH_ERROR;
+	readonly payload: any;
+}
+export interface IWS_CONNECTION_AUTH_CLOSED {
+	readonly type: typeof WS_CONNECTION_AUTH_CLOSED;
+}
+export interface IWS_GET_MESSAGE_AUTH {
+	readonly type: typeof WS_GET_MESSAGE_AUTH;
+	readonly payload: any;
+}
+export interface IWS_SEND_MESSAGE_AUTH {
+	readonly type: typeof WS_SEND_MESSAGE_AUTH;
+}
+export type TWsAuthActions =
+  | IWS_CONNECTION_AUTH_START
+  | IWS_CONNECTION_AUTH_SUCCESS
+  | IWS_CONNECTION_AUTH_ERROR
+  | IWS_CONNECTION_AUTH_CLOSED
+  | IWS_GET_MESSAGE_AUTH
+  | IWS_SEND_MESSAGE_AUTH;

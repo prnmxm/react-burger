@@ -29,10 +29,48 @@ import {
     
     LOGIN_FAILED,
     LOGIN_REQUEST,
-    LOGIN_SUCCESS
+    LOGIN_SUCCESS,
+    TUserActions
 } from '../actions/user';
+type TUserState = {
+    name: string,
+    email: string,
+    password: string,
 
-const initialState = {
+    registerRequst: boolean,
+    registerSuccess: boolean,
+    regitsterFailed: boolean,
+
+    forgotRequst: boolean,
+    forgotSuccess: boolean,
+    forgotFailed: boolean,
+    
+    resetRequst: boolean,
+    resetSuccess: boolean,
+    resetFailed: boolean,
+    
+    logoutRequst: boolean,
+    logoutSuccess: boolean,
+    logoutFailed: boolean,
+
+    refreshRequst: boolean,
+    refreshSuccess: boolean,
+    refreshFailed: boolean,
+
+    userdataRequst: boolean,
+    userdataSuccess: boolean,
+    userdataFailed: boolean,
+
+    userdataupdateRequst: boolean,
+    userdataupdateSuccess: boolean,
+    userdataupdateFailed: boolean,
+
+    loginRequst: boolean,
+    loginFailed: boolean,
+    loginSuccess: boolean,
+
+}
+const initialState:TUserState = {
     name: '',
     email: '',
     password: '',
@@ -43,7 +81,7 @@ const initialState = {
 
     forgotRequst: false,
     forgotSuccess: false,
-    regitsterFailed: false,
+    forgotFailed: false,
     
     resetRequst: false,
     resetSuccess: false,
@@ -71,7 +109,7 @@ const initialState = {
 
 }
 
-export const userReducer = (state = initialState, action) => {
+export const userReducer = (state = initialState, action:TUserActions):TUserState => {
     switch(action.type) {
         case REGISTER_REQUEST: {
             return {

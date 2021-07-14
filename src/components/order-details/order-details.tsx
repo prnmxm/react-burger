@@ -4,6 +4,8 @@ type TOrderDetails = {
     number: number
 }
 function OrderDetails({number}:TOrderDetails) {
+    console.log(number);
+    
     return (
         <div className={style.order}>
             <p className="text text_type_digits-medium mb-4">{number}</p>

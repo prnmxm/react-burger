@@ -5,15 +5,22 @@ import {
 	WS_CONNECTION_AUTH_CLOSED,
 	WS_GET_MESSAGE_AUTH,
 	WS_SEND_MESSAGE_AUTH,
+	TWsAuthActions
 } from '../actions/ws-auth';
 
-const initialState = {
+type TInitialState = {
+	wsConnected: boolean,
+	error: null | boolean,
+	messages: Array<any>
+};
+
+const initialState:TInitialState = {
 	wsConnected: false,
 	error: null,
 	messages: []
 };
 
-export const wsReducerAuth = (state = initialState, action) => {
+export const wsReducerAuth = (state = initialState, action:TWsAuthActions):TInitialState => {
 	switch (action.type) {
 		case WS_CONNECTION_AUTH_SUCCESS:
 			return {
