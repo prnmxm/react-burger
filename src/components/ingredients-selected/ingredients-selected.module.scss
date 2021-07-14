@@ -1,0 +1,20 @@
+.containerScroll {
+    max-height: 370px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 16px 0;
+    &:last-child {
+        margin-bottom: 0;
+    }
+    &::-webkit-scrollbar {
+        width: 12px;
+    }
+    &::-webkit-scrollbar-track {
+        background: #2F2F37;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: #8585AD;
+        border: 3px solid #2F2F37;
+        border-radius: 6px;
+    }
+}

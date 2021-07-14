@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    max-width: calc(100% - 20px);
+    div {
+        width: 100%;
+        @media screen {
+            
+        }
+    }
+}
