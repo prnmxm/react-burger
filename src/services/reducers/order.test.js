@@ -1,5 +1,5 @@
 import {GET_ORDER_FAILED, GET_ORDER_REQUEST, GET_ORDER_SUCCES} from '../actions/order'
-import {orderReducer, initialState} from './order.js'
+import {orderReducer, initialState} from './order.tas'
 
 describe('order reducer', () => {
     it('should return the initial state', () => {

@@ -34,7 +34,7 @@ export default function IngredientMain ({item}:TIngredientMain) {
                 <source srcSet={item.image_mobile} media="(max-width: 639px)"/>
                 <img src={item.image} alt={item.name}/>
             </picture>
-            {item.count !== 0 && <Counter count={item.count && item.count|| 0} size="small" />}
+            {item.count !== 0 && <Counter count={item.count && item.count || 0} size="small" />}
             <span className={`text text_type_digits-small ${style.price}`}>{item.price} <CurrencyIcon type="primary" /></span>
             <p className={`text text_type_main-default ${style.title}`}>{item.name}</p>
         </div>

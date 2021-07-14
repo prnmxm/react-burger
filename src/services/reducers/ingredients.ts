@@ -54,7 +54,7 @@ export const ingredientsReducer = ( state = initialState , action: TIngredientsA
         }
         case INGREDIENTS_ADD: {
             const newState = {...state, items: state.items.map( e => {
-                if (e._id === action.payload._id && e.count) {
+                if (e._id === action.payload._id && e.count !== null && e.count !== undefined) {
                     return {
                         ...e,
                         count: e.count + 1

@@ -38,7 +38,7 @@ export default function IngredientsSelected ({items}:TIngredientSelected) {
             {itemsOther.length !== 0 &&
             <div className={style.containerScroll}> 
                 {itemsOther.map( (e) => (
-                    <IngredientSelected item={e} styleClass={'firsts'} key={e.customId} lock={false}/>
+                    <IngredientSelected item={e} key={e.customId} lock={false}/>
                 ))}
             </div>
             || <IngredientsEmpty>Начинка</IngredientsEmpty>

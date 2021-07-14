@@ -7,8 +7,12 @@ import { INGREDIENTS_REMOVE, INGREDIENTS_SELECTED_UPDATE } from '../../services/
 import { useDrag, useDrop } from 'react-dnd';
 import {TIngredient} from '../../types'; 
 import { useSelector, useDispatch } from '../../hooks';
-
-export default function IngredientSelected ({item, styleClass, lock}: {item:TIngredient, styleClass: string, lock: boolean}) {
+type TIngredientSelected = {
+  item: TIngredient,
+  styleClass?: string,
+  lock: boolean
+}
+export default function IngredientSelected ({item, styleClass, lock}: TIngredientSelected) {
     const dispatch = useDispatch();
     const {selected} = useSelector((store) => ({
         selected: store.ingredients.selected

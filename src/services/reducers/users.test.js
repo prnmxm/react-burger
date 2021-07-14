@@ -31,7 +31,7 @@ import {
     LOGIN_REQUEST,
     LOGIN_SUCCESS
 } from '../actions/user';
-import {userReducer, initialState} from './user.js'
+import {userReducer, initialState} from './user.ts'
 
 describe('users reducer', () => {
     it('should return the initial state', () => {
@@ -47,7 +47,7 @@ describe('users reducer', () => {
         
             forgotRequst: false,
             forgotSuccess: false,
-            regitsterFailed: false,
+            forgotFailed: false,
             
             resetRequst: false,
             resetSuccess: false,

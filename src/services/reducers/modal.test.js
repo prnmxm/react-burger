@@ -1,4 +1,4 @@
-import {modalReducer, initialState} from './modal.js'
+import {modalReducer, initialState} from './modal.ts'
 import {OPEN_MODAL, CLOSE_MODAL} from '../actions/modal';
 
 describe('modal reducer', () => {
