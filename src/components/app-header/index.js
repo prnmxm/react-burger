@@ -1,3 +1,3 @@
-import AppHeader from './app-header.jsx';
+import AppHeader from './app-header.tsx';
 
 export { AppHeader };

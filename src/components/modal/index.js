@@ -1,2 +1,2 @@
-import Modal from './modal.jsx'
+import Modal from './modal.tsx'
 export { Modal }

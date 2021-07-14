@@ -1,4 +1,5 @@
 import {setCookie, getCookie, deleteCookie} from '../../utils/fn'
+import { push } from 'connected-react-router';
 export const REGISTER_REQUEST = "REGISTER_REQUEST"
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS"
 export const REGISTER_FAILED = "REGISTER_FAILED"
@@ -30,7 +31,6 @@ export const USERDATAUPDATE_FAILED = "USERDATAUPDATE_FAILED"
 export const LOGIN_REQUEST = "LOGIN_REQUEST"
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS"
 export const LOGIN_FAILED = "LOGIN_FAILED"
-import { push } from 'connected-react-router';
 
 export const registerUser = (value) => (dispatch) => {
     dispatch({
