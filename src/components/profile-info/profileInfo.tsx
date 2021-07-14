@@ -36,7 +36,7 @@ export default function ProfileInfo () {
       }))
     }
     if (!userdataSuccess) {
-        return ''
+        return null
     }
     const cancel = (e:any) => {
         e.preventDefault();

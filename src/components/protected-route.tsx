@@ -1,14 +1,15 @@
-// @ts-nocheck
-import React, { useEffect } from 'react';
+import React, { useEffect, FC } from 'react';
 import { Redirect, Route } from 'react-router-dom';
 import {refreshToken} from '../services/actions/user'
 import { useSelector, useDispatch } from 'react-redux';
 
-
-export function ProtectedRoute({ children, ...rest }) {
+export const ProtectedRoute: FC<{
+  path: string;
+  exact?: boolean;
+}> = ({ children, ...rest }) => {
   const dispatch = useDispatch();
 
-  const tokenSuccess = useSelector(store => store.user.refreshSuccess);
+  const tokenSuccess = useSelector((store:any) => store.user.refreshSuccess);
   const hasToken = !!localStorage.getItem('refreshToken');
   useEffect(() => {
     if (!tokenSuccess && hasToken) {
@@ -17,7 +18,7 @@ export function ProtectedRoute({ children, ...rest }) {
   }, [dispatch, hasToken, tokenSuccess]);
 
   if (hasToken && !tokenSuccess) {
-    return ''
+    return null
   }
 
   return (

@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect } from 'react';
 import { AppHeader } from '../app-header'
 import { Modal } from '../modal';

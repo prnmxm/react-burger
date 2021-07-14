@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useCallback } from 'react'
 import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
@@ -54,6 +53,7 @@ function BurgerIngredients () {
             payload: {ref, name}
         })
     }, [])
+    
     return (
         <div className={`${style.container}`}>
             <h1 className={`text text_type_main-large ${style.title}`}>Соберите бургер</h1>

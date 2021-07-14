@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './registration.module.scss'
 import { Link, useHistory } from "react-router-dom";

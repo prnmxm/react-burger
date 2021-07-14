@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { ProfileNav } from '../../components/profile-nav'
 import styles from './profile.module.scss'
 import {ProfileInfo} from '../../components/profile-info';

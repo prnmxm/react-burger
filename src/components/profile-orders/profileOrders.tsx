@@ -31,6 +31,6 @@ export default function ProfileOrders () {
             pathname: `/profile/orders/${e._id}`,
             state: { background: location }
           }} id={e}  data={e}/>)}
-    </div> : ''
+    </div> : null
     )
 }

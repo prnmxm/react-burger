@@ -1,5 +1,3 @@
-// @ts-nocheck
-import {useEffect} from 'react'
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login.module.scss'
 import { Link, useHistory,useLocation } from "react-router-dom";
@@ -9,7 +7,7 @@ import { Redirect } from 'react-router-dom';
 
 import React from 'react'
 export default function Login () {
-  const { state } = useLocation();
+  const { state } = useLocation<any>();
     const history = useHistory();
     const dispatch = useDispatch();
     const [value, setValue] = React.useState({
@@ -55,7 +53,6 @@ export default function Login () {
                         value={value.password}
                         name={'password'}
                         size={'default'}
-                        placeholder={'password'}
                     />
                 </div>
                 <Button type="primary" size="medium">

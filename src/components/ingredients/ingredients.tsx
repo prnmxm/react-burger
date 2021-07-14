@@ -1,3 +1,7 @@
+type Tingredient = {
+    items:any;
+    refsTabs: any;
+}
 import { IngredientCategory } from '../ingredient-category'
 import style from './ingredients.module.scss'
 import PropTypes from 'prop-types'
@@ -6,7 +10,7 @@ import { SET_ACTIVE_TAB_SCROLL } from '../../services/actions/tabs'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
 
-export default function Ingredients ({items, refsTabs}:any) {
+export default function Ingredients ({items, refsTabs}:Tingredient) {
     const dispatch = useDispatch();
     const {tabs} = useSelector((store:any) => ({
         tabs: store.tabs.tabs,
