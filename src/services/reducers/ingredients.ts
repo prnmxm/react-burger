@@ -5,7 +5,19 @@ import { GET_INGREDIENTS_REQUEST,
     INGREDIENTS_REMOVE,
     INGREDIENTS_SELECTED_CLEAR,
     INGREDIENTS_SELECTED_UPDATE } from '../actions/ingredients';
-const initialState = {
+import { TIngredientsActions } from '../actions/ingredients';
+import { TIngredient } from '../../types'
+
+type TIngredientsState = {
+    items: Array<TIngredient>,
+    itemsRequest: boolean,
+    itemsLoaded: boolean,
+    itemsError: boolean,
+    selected: Array<TIngredient>,
+    isDisabledOrder: boolean,
+    selectedBun: any,
+};
+const initialState: TIngredientsState = {
     items: [],
     itemsRequest: false,
     itemsLoaded: false,
@@ -15,7 +27,7 @@ const initialState = {
     isDisabledOrder: true,
     selectedBun: {},
 };
-export const ingredientsReducer = ( state = initialState , action ) => {
+export const ingredientsReducer = ( state = initialState , action: TIngredientsActions ): TIngredientsState => {
     switch(action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {
@@ -42,7 +54,7 @@ export const ingredientsReducer = ( state = initialState , action ) => {
         }
         case INGREDIENTS_ADD: {
             const newState = {...state, items: state.items.map( e => {
-                if (e._id === action.payload._id) {
+                if (e._id === action.payload._id && e.count) {
                     return {
                         ...e,
                         count: e.count + 1
@@ -81,7 +93,7 @@ export const ingredientsReducer = ( state = initialState , action ) => {
         }
         case INGREDIENTS_REMOVE: {
             const newState = {...state,items: state.items.map( e => {
-                if (e._id === action.payload._id) {
+                if (e._id === action.payload._id && e.count) {
                     return {
                         ...e,
                         count: e.count - 1
