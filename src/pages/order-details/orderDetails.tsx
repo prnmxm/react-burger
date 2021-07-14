@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { shallowEqual } from 'react-redux';
 import styles from './orderDetails.module.scss';
 import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components";
@@ -8,7 +8,7 @@ import { useRouteMatch } from 'react-router-dom';
 import { WS_CONNECTION_AUTH_START, WS_CONNECTION_AUTH_CLOSED } from '../../services/actions/ws-auth';
 import {conversionDateForCard} from '../../utils/fn'
 import { useSelector, useDispatch } from '../../hooks';
-import {TIngredient, TOrder} from '../../types'
+import {TIngredient } from '../../types'
 export default function OrderDetails () {
     const dispatch = useDispatch();
     const isProfile = !!useRouteMatch("/profile")

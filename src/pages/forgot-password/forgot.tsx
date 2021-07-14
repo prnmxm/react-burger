@@ -1,23 +1,28 @@
-import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, Input, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './forgot.module.scss'
 import { Link, useHistory } from "react-router-dom";
 import {forgotPassword} from '../../services/actions/user'
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
+interface Icounters {
+  target: {
+      name: string,
+      value: string
+  }
+}
 export default function Forgot () {
-    const history = useHistory();
     const dispatch = useDispatch();
     const [value, setValue] = React.useState({
         email: '',
     })
-    const setValueInput = (e:any) => {
+    const setValueInput = (e:Icounters) => {
       setValue((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
       }))
     }
-    const submit = (e:any) => {
+    const submit = (e:SyntheticEvent) => {
         e.preventDefault();
         dispatch(forgotPassword(value));
     }

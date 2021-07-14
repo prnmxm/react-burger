@@ -2,7 +2,7 @@
 import { IngredientCategory } from '../ingredient-category'
 import style from './ingredients.module.scss'
 import PropTypes from 'prop-types'
-import { useRef } from 'react';
+import React, { useRef } from 'react';
 import { SET_ACTIVE_TAB_SCROLL } from '../../services/actions/tabs'
 import { shallowEqual } from 'react-redux';
 import { useSelector, useDispatch } from '../../hooks';
@@ -18,14 +18,16 @@ export default function Ingredients ({items, refsTabs}:Tingredients) {
         tabs: store.tabs.tabs,
     }),shallowEqual)
     const containerRef = useRef(document.createElement("div"));
-    const scrollView = (el:any) => {
-      const rect = el.getBoundingClientRect();
-      return (
-            Math.abs(containerRef.current.getBoundingClientRect().top - rect.top)
-      );
+    const scrollView = (el:HTMLElement|null) => {
+      if (el) {
+        const rect = el.getBoundingClientRect();
+        return (
+              Math.abs(containerRef.current.getBoundingClientRect().top - rect.top)
+        );
+      }
     }
     const checkElem = () => {
-        const mapCheck = tabs.map( (e:any) => scrollView(document.querySelector(`[data-name=${e}]`)));
+        const mapCheck = tabs.map( (e:string) => scrollView(document.querySelector(`[data-name=${e}]`)));
         const i = mapCheck.indexOf(Math.min(...mapCheck))
         dispatch({
             type: SET_ACTIVE_TAB_SCROLL,

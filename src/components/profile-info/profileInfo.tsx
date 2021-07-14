@@ -3,7 +3,12 @@ import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burg
 import React, {SyntheticEvent, useEffect} from 'react'
 import {userDataUpdate, userData} from '../../services/actions/user'
 import { useSelector, useDispatch } from '../../hooks';
-
+interface Icounters {
+    target: {
+        name: string,
+        value: string
+    }
+  }
 export default function ProfileInfo () {
     const dispatch = useDispatch();
     const {email: currentE, name: currentN,userdataSuccess} = useSelector((store) => ({
@@ -29,7 +34,7 @@ export default function ProfileInfo () {
           };
         });
       }, [currentE, currentN])
-    const setValueInput = (e:any) => {
+    const setValueInput = (e:Icounters) => {
       setValue((prev) => ({
         ...prev,
         [e.target.name]: e.target.value

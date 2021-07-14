@@ -2,9 +2,10 @@ import styles from './profileNav.module.scss'
 import { NavLink } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import {logoutUser} from '../../services/actions/user'
+import { SyntheticEvent } from 'react';
 export default function ProfileNav () {
     const dispatch = useDispatch();
-    const logout = (e:any) => {
+    const logout = (e:SyntheticEvent) => {
         e.preventDefault()
         dispatch(logoutUser());
       };

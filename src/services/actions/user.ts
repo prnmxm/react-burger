@@ -1,4 +1,4 @@
-import { AppDispatch, AppThunk, TIngredient } from '../../types';
+import { AppDispatch, AppThunk } from '../../types';
 import {setCookie, getCookie, deleteCookie} from '../../utils/fn'
 import { push } from 'connected-react-router';
 export const REGISTER_REQUEST: 'REGISTER_REQUEST' = "REGISTER_REQUEST"

@@ -1,28 +1,32 @@
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './login.module.scss'
-import { Link, useHistory,useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {loginUser} from '../../services/actions/user'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
-
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
+interface Icounters {
+  target: {
+      name: string,
+      value: string
+  }
+}
 export default function Login () {
   const { state } = useLocation<any>();
-    const history = useHistory();
     const dispatch = useDispatch();
     const [value, setValue] = React.useState({
         email: '',
         password: ''
     })
     const hasToken = localStorage.getItem('refreshToken')
-    const setValueInput = (e:any) => {
+    const setValueInput = (e:Icounters) => {
       setValue((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
       }))
     }
     const path =  state?.from.pathname || '/';
-    const submit = (e:any) => {
+    const submit = (e:SyntheticEvent) => {
         e.preventDefault();
         dispatch(loginUser({value, path}));
     }

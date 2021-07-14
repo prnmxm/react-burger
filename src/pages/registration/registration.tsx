@@ -1,10 +1,16 @@
 import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './registration.module.scss'
-import { Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {registerUser} from '../../services/actions/user'
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+interface Icounters {
+  target: {
+      name: string,
+      value: string
+  }
+}
 export default function Registration () {
     const [value, setValue] = React.useState({
         email: '',
@@ -12,13 +18,13 @@ export default function Registration () {
         name: ''
     })
     const dispatch = useDispatch();
-    const setValueInput = (e:any) => {
+    const setValueInput = (e:Icounters) => {
       setValue((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
       }))
     }
-    const submit = (e:any) => {
+    const submit = (e:SyntheticEvent) => {
         e.preventDefault();
         dispatch(registerUser(value));
     }

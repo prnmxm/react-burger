@@ -17,7 +17,7 @@ export default function IngredientSelected ({item, styleClass, lock}: {item:TIng
     const index = selected.findIndex((e:TIngredient) => e.customId === item.customId);
     const [, drop] = useDrop({
         accept: 'ingMain',
-        hover(e:any) {
+        hover(e:TIngredient) {
           if (!ref.current) {
             return;
           }

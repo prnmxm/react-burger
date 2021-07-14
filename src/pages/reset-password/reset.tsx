@@ -1,10 +1,16 @@
-import { Button, Input, PasswordInput, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
+import { Button, Input, Logo } from "@ya.praktikum/react-developer-burger-ui-components";
 import styles from './reset.module.scss'
 import { Link } from "react-router-dom";
 import {resetPassword} from '../../services/actions/user'
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 import { Redirect } from 'react-router-dom';
 import { useSelector, useDispatch } from '../../hooks';
+interface Icounters {
+  target: {
+      name: string,
+      value: string
+  }
+}
 export default function ResetPassword () {
   const dispatch = useDispatch();
     const [value, setValue] = React.useState({
@@ -14,13 +20,13 @@ export default function ResetPassword () {
     const {email} = useSelector((store) => ({
       email: store.user.email,
   }));
-    const setValueInput = (e:any) => {
+    const setValueInput = (e:Icounters) => {
       setValue((prev) => ({
         ...prev,
         [e.target.name]: e.target.value
       }))
     }
-    const submit = (e:any) => {
+    const submit = (e:SyntheticEvent) => {
         e.preventDefault();
         dispatch(resetPassword(value));
     }

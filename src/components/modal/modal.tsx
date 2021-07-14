@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React from 'react';
+import React, { SyntheticEvent } from 'react';
 import style from './modal.module.scss' 
 import {ModalOverlay} from '../modal-overlay'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
@@ -23,7 +23,7 @@ function Modal(props:TModalProps) {
             type: CLOSE_MODAL
         })
     },[])
-    function clear (e:any) {
+    function clear (e:KeyboardEvent) {
         if(e.keyCode === 27 && props.close) {
             props.close()
         }

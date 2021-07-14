@@ -17,6 +17,7 @@ export type TIngredient = {
 	readonly __v?: number;
 	readonly count?: number | null; 
 	readonly customId?: number | null; 
+	index: number;
 }
 export type TIngredientCat = {
 	readonly items: Array<TIngredient>
