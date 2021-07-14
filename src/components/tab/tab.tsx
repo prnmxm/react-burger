@@ -4,8 +4,12 @@ import PropTypes from 'prop-types'
 import {useDispatch} from 'react-redux';
 import { SET_ACTIVE_TAB_CLICK } from '../../services/actions/tabs'
 import { useSelector, shallowEqual } from 'react-redux';
-
-export default function TabSection ({items}:any) {
+type TTabSection = {
+  items: Array<string>
+}
+export default function TabSection ({items}:TTabSection) {
+  console.log(items);
+  
   const dispatch = useDispatch();
   const {active} = useSelector((store:any) => ({
     active: store.tabs.active,
@@ -28,6 +32,6 @@ export default function TabSection ({items}:any) {
       </div>
     )
   }
-TabSection.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.string)
-}
+// TabSection.propTypes = {
+//   items: PropTypes.arrayOf(PropTypes.string)
+// }

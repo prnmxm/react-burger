@@ -61,12 +61,5 @@ function IngredientDetails() {
         </div> || ''
     )
 }
-IngredientDetails.propTypes = {
-    image: PropTypes.string,
-    calories: PropTypes.number,
-    carbohydrates: PropTypes.number,
-    fats: PropTypes.number,
-    desc: PropTypes.string,
-    proteins: PropTypes.number,
-}
+
 export default IngredientDetails;

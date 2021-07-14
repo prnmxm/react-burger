@@ -1,3 +1,3 @@
-import IngredientCategory from './ingredient-category';
+import {IngredientCategory} from './ingredient-category';
 
 export { IngredientCategory };

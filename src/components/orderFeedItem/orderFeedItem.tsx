@@ -3,8 +3,14 @@ import { CurrencyIcon } from "@ya.praktikum/react-developer-burger-ui-components
 import {useDispatch, useSelector, shallowEqual} from 'react-redux';
 import {Link, useRouteMatch, useLocation} from 'react-router-dom'
 import {conversionDateForCard} from '../../utils/fn'
-
-export default function OrderFeedItem ({path, id, data}:any) {
+import {TOrder} from '../../types'
+import {TIngredient} from '../../types'
+type TOrderFeedItem = {
+    path: any;
+    id: number;
+    data: TOrder;
+}
+export default function OrderFeedItem ({path, id, data}:TOrderFeedItem) {
     const {items} = useSelector((store:any) => ({
         items: store.ingredients.items,
     }),shallowEqual)

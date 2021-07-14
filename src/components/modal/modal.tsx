@@ -6,8 +6,11 @@ import {ModalOverlay} from '../modal-overlay'
 import { CloseIcon } from '@ya.praktikum/react-developer-burger-ui-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { CLOSE_MODAL } from '../../services/actions/modal';
-
-function Modal(props:any) {
+type TModalProps = {
+    children: React.ReactNode;
+    close?: () => void;
+} 
+function Modal(props:TModalProps) {
     const dispatch = useDispatch();
     const {title, content} = useSelector( (store:any) => ({
         title: store.modal.title,

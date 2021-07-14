@@ -1,6 +1,6 @@
 import styles from './profileInfo.module.scss'
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
-import React, {useEffect} from 'react'
+import React, {SyntheticEvent, useEffect} from 'react'
 import {userDataUpdate, userData} from '../../services/actions/user'
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -38,7 +38,7 @@ export default function ProfileInfo () {
     if (!userdataSuccess) {
         return null
     }
-    const cancel = (e:any) => {
+    const cancel = (e:SyntheticEvent) => {
         e.preventDefault();
         setValue({
             email: currentE,
@@ -46,7 +46,7 @@ export default function ProfileInfo () {
             name: currentN
         })
     }
-    const submit = (e:any) => {
+    const submit = (e:SyntheticEvent) => {
         e.preventDefault();
         dispatch(userDataUpdate(value));
     }

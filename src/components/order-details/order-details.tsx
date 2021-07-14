@@ -1,10 +1,13 @@
 import done from '../../images/done.png'
 import PropTypes from 'prop-types'
 import style from './order-details.module.scss';
-function OrderDetails(props: any) {
+type TOrderDetails = {
+    number: number
+}
+function OrderDetails({number}:TOrderDetails) {
     return (
         <div className={style.order}>
-            <p className="text text_type_digits-medium mb-4">{props.number}</p>
+            <p className="text text_type_digits-medium mb-4">{number}</p>
             <p className="text text_type_main-default mb-4">
                 идентификатор заказа
             </p>

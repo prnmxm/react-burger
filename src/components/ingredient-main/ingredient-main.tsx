@@ -5,10 +5,14 @@ import PropTypes from 'prop-types'
 import { IngredientDetails } from '../ingredient-details'
 import { useDrag } from "react-dnd";
 import { useDispatch } from 'react-redux';
+import {TIngredient} from '../../types'; 
 import {
     Link, useLocation,
   } from "react-router-dom";
-export default function IngredientMain ({item}:any) {
+  type TIngredientMain = {
+    item: TIngredient
+}
+export default function IngredientMain ({item}:TIngredientMain) {
     const location = useLocation();
     const [{isDrag},dragRef] = useDrag({
         type: 'product',
@@ -30,26 +34,10 @@ export default function IngredientMain ({item}:any) {
                 <source srcSet={item.image_mobile} media="(max-width: 639px)"/>
                 <img src={item.image} alt={item.name}/>
             </picture>
-            {item.count !== 0 && <Counter count={item.count} size="small" />}
+            {item.count !== 0 && <Counter count={item.count && item.count|| 0} size="small" />}
             <span className={`text text_type_digits-small ${style.price}`}>{item.price} <CurrencyIcon type="primary" /></span>
             <p className={`text text_type_main-default ${style.title}`}>{item.name}</p>
         </div>
         </Link>
     )
 } 
-IngredientMain.propTypes = {
-    item: PropTypes.shape({
-        _id: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.string.isRequired,
-        proteins: PropTypes.number.isRequired,
-        fat: PropTypes.number.isRequired,
-        carbohydrates: PropTypes.number.isRequired,
-        calories: PropTypes.number.isRequired,
-        price: PropTypes.number.isRequired,
-        image: PropTypes.string.isRequired,
-        image_mobile: PropTypes.string.isRequired,
-        image_large: PropTypes.string.isRequired,
-        __v: PropTypes.number,
-    }).isRequired,
-}
