@@ -3,12 +3,13 @@ import {Tab} from '../tab'
 import style from './burger-ingredients.module.scss';
 import { Ingredients } from '../ingredients'
 import { category } from '../../utils/constants';
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { shallowEqual } from 'react-redux';
 import { ADD_ITEMS_TITLE, ADD_ITEMS_REF } from '../../services/actions/tabs'
+import { useSelector, useDispatch } from '../../hooks';
 
 function BurgerIngredients () {
     const dispatch = useDispatch();
-    const {items} = useSelector((store:any) => ({
+    const {items} = useSelector((store) => ({
         items: store.ingredients.items,
     }),shallowEqual)
     const checkCategory = (text:string) => {
@@ -28,7 +29,7 @@ function BurgerIngredients () {
         }, {})
     }, [items])
     const sortToArray = React.useMemo(() => {
-        const arr =[];
+        const arr = [];
         for (const item in sort) {
             const data = {
                 category: checkCategory(item) ,
@@ -47,7 +48,7 @@ function BurgerIngredients () {
         return arr 
     }, []);
 
-    const refsTabs = useCallback((ref: any, name:any):void => {
+    const refsTabs = useCallback((ref: any, name:string):void => {
         dispatch({
             type: ADD_ITEMS_REF,
             payload: {ref, name}

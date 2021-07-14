@@ -3,18 +3,18 @@ import { CurrencyIcon, LockIcon, DragIcon } from '@ya.praktikum/react-developer-
 import style from './ingredient-selected.module.scss'
 import { DeleteIcon } from "@ya.praktikum/react-developer-burger-ui-components/dist/ui/icons/delete-icon";
 import PropTypes from 'prop-types'
-import {useDispatch, useSelector, useStore} from 'react-redux'
 import { INGREDIENTS_REMOVE, INGREDIENTS_SELECTED_UPDATE } from '../../services/actions/ingredients'
 import { useDrag, useDrop } from 'react-dnd';
 import {TIngredient} from '../../types'; 
+import { useSelector, useDispatch } from '../../hooks';
 
 export default function IngredientSelected ({item, styleClass, lock}: {item:TIngredient, styleClass: string, lock: boolean}) {
     const dispatch = useDispatch();
-    const {selected} = useSelector((store: any) => ({
+    const {selected} = useSelector((store) => ({
         selected: store.ingredients.selected
     }));
     const ref = useRef(null);
-    const index = selected.findIndex((e:any) => e.customId === item.customId);
+    const index = selected.findIndex((e:TIngredient) => e.customId === item.customId);
     const [, drop] = useDrop({
         accept: 'ingMain',
         hover(e:any) {

@@ -69,7 +69,7 @@ export const getIngredients:AppThunk = () => (dispatch: AppDispatch) => {
         return Promise.reject(e)
     })
     .then((e)=> {
-        const modData = e.data.map( (e:any) => {
+        const modData = e.data.map( (e:TIngredient) => {
             return {
                 ...e,
                 count: 0,

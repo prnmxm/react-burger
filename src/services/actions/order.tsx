@@ -48,7 +48,7 @@ export const getOrder = (ingredients:AppThunk) => (dispatch:AppDispatch) => {
         dispatch({
             type: OPEN_MODAL, 
             payload: {
-                content: <OrderDetails order={e.order.number}/>
+                content: <OrderDetails number={e.order.number}/>
             }
         })
         dispatch({

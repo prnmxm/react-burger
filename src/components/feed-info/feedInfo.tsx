@@ -1,7 +1,9 @@
 import styles from './feedInfo.module.scss'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { TOrder } from '../../types'
+import { useSelector, useDispatch } from '../../hooks';
+
 export default function FeedInfo () {
-    const { orders: orders1, total, totalToday } = useSelector((store: any) => store.ws.messages)
+    const { orders: orders1, total, totalToday } = useSelector((store) => store.ws.messages)
     const filterA = (arr: []) => {
         return arr && arr.reduce((acc: any, curr: any) => {
           curr.status === 'done' ? acc['nArr'] = [...acc['nArr'], curr] : acc['dArr'] = [...acc['dArr'], curr]
@@ -15,7 +17,7 @@ export default function FeedInfo () {
            <div>
                <h3  className="text text_type_main-default">Готовы</h3>
                <ul  className={styles.list}>
-                   {dArr.splice(0,10).map( (e:any, i:number) => {
+                   {dArr.splice(0,10).map( (e:TOrder, i:number) => {
                        return <li key={i}>
                            <p className="text text_type_digits-default"  style={{color: '#00CCCC'}}>{e.number}</p>
                        </li>
@@ -25,7 +27,7 @@ export default function FeedInfo () {
            <div>
                <h3>В работе:</h3>
                <ul  className={styles.list}>
-                   {nArr.splice(0,10).map( (e:any, i:number) => {
+                   {nArr.splice(0,10).map( (e:TOrder, i:number) => {
                        return <li key={i}>
                            <p className="text text_type_digits-default">{e.number}</p>
                        </li>

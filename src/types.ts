@@ -18,6 +18,10 @@ export type TIngredient = {
 	readonly count?: number | null; 
 	readonly customId?: number | null; 
 }
+export type TIngredientCat = {
+	readonly items: Array<TIngredient>
+	readonly category?: string
+}
 export type TOrder = {
 	_id: string;
 	createdAt: string;

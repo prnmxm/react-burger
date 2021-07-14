@@ -4,14 +4,14 @@ import { Link } from "react-router-dom";
 import {resetPassword} from '../../services/actions/user'
 import React from 'react'
 import { Redirect } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
 export default function ResetPassword () {
   const dispatch = useDispatch();
     const [value, setValue] = React.useState({
         password: '',
         token: '',
     })
-    const {email} = useSelector((store:any) => ({
+    const {email} = useSelector((store) => ({
       email: store.user.email,
   }));
     const setValueInput = (e:any) => {

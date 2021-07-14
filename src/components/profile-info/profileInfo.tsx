@@ -2,11 +2,11 @@ import styles from './profileInfo.module.scss'
 import { Button, Input, PasswordInput } from "@ya.praktikum/react-developer-burger-ui-components";
 import React, {SyntheticEvent, useEffect} from 'react'
 import {userDataUpdate, userData} from '../../services/actions/user'
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from '../../hooks';
 
 export default function ProfileInfo () {
     const dispatch = useDispatch();
-    const {email: currentE, name: currentN,userdataSuccess} = useSelector((store:any) => ({
+    const {email: currentE, name: currentN,userdataSuccess} = useSelector((store) => ({
         email: store.user.email,
         name: store.user.name,
         userdataSuccess: store.user.userdataSuccess
