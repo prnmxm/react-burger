@@ -26,6 +26,8 @@ function Modal(props:TModalProps) {
     function clear (e:KeyboardEvent) {
         if(e.keyCode === 27 && props.close) {
             props.close()
+        } else {
+            close()
         }
     }
     React.useEffect(()=> {
