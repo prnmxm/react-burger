@@ -31,6 +31,3 @@ export default function TabSection ({items}:TTabSection) {
       </div>
     )
   }
-// TabSection.propTypes = {
-//   items: PropTypes.arrayOf(PropTypes.string)
-// }

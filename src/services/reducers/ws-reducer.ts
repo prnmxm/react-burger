@@ -8,9 +8,9 @@ import {
 type TInitialState = {
 	wsConnected: boolean,
 	error: null | boolean,
-	messages: Array<any>
+	messages: any
 };
-const initialState = {
+const initialState:TInitialState = {
 	wsConnected: false,
 	error: null,
 	messages: []

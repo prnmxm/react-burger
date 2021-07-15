@@ -1,5 +1,4 @@
 import style from './ingredient-details.module.scss'
-import PropTypes from 'prop-types'
 import { shallowEqual } from 'react-redux';
 import {useParams} from 'react-router-dom'
 import { useEffect } from 'react';
@@ -23,16 +22,16 @@ function IngredientDetails() {
     return (
         itemsLoaded && 
  <div className={style.order}>
-            <img src={props.image}/>
-            <h3 className={style.title}>{props.name}</h3>
-            <p className={style.desc + ' ' + "text text_type_main-default"}>{props.desc}</p>
+            <img src={props!.image}/>
+            <h3 className={style.title}>{props!.name}</h3>
+            <p className={style.desc + ' ' + "text text_type_main-default"}>{props!.desc}</p>
             <div className={style.info}>
                 <div className={style.infoItem}>
                     <span className='text text_type_main-small text_color_inactive'>
                         Каллорий, ккал
                     </span>
                     <span className="text text_type_digits-default text_color_inactive">
-                        {props.calories}
+                        {props!.calories}
                     </span>
                 </div>
                 <div className={style.infoItem}>
@@ -40,7 +39,7 @@ function IngredientDetails() {
                         Белки, г
                     </span>
                     <span className="text text_type_digits-default text_color_inactive">
-                        {props.proteins}
+                        {props!.proteins}
                     </span>
                 </div>
                 <div className={style.infoItem}>
@@ -48,7 +47,7 @@ function IngredientDetails() {
                         Жиры, г
                     </span>
                     <span className="text text_type_digits-default text_color_inactive">
-                        {props.fats}
+                        {props!.fats}
                     </span>
                 </div>
                 <div className={style.infoItem}>
@@ -56,7 +55,7 @@ function IngredientDetails() {
                         Углеводы, г
                     </span>
                     <span className="text text_type_digits-default text_color_inactive">
-                        {props.carbohydrates}
+                        {props!.carbohydrates}
                     </span>
                 </div>
             </div>

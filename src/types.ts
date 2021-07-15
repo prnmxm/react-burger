@@ -7,7 +7,9 @@ export type TIngredient = {
 	readonly name: string;
 	readonly type?: string | undefined;
 	readonly proteins: number;
-	readonly fat: number;
+	readonly fat?: number;
+	readonly fats?: number;
+	readonly desc?: number;
 	readonly carbohydrates: number;
 	readonly calories: number;
 	readonly price: number;

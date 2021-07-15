@@ -1,10 +1,6 @@
-import React, {useContext} from 'react'
 import { CurrencyIcon, Counter } from '@ya.praktikum/react-developer-burger-ui-components';
 import style from './ingredient-main.module.scss'
-import PropTypes from 'prop-types'
-import { IngredientDetails } from '../ingredient-details'
 import { useDrag } from "react-dnd";
-import { useDispatch } from 'react-redux';
 import {TIngredient} from '../../types'; 
 import {
     Link, useLocation,

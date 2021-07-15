@@ -1,7 +1,6 @@
 
 import { IngredientCategory } from '../ingredient-category'
 import style from './ingredients.module.scss'
-import PropTypes from 'prop-types'
 import React, { useRef } from 'react';
 import { SET_ACTIVE_TAB_SCROLL } from '../../services/actions/tabs'
 import { shallowEqual } from 'react-redux';
@@ -27,7 +26,7 @@ export default function Ingredients ({items, refsTabs}:Tingredients) {
       }
     }
     const checkElem = () => {
-        const mapCheck = tabs.map( (e:string) => scrollView(document.querySelector(`[data-name=${e}]`)));
+        const mapCheck = tabs.map( (e:string) => scrollView(document.querySelector(`[data-name=${e}]`))||0);
         const i = mapCheck.indexOf(Math.min(...mapCheck))
         dispatch({
             type: SET_ACTIVE_TAB_SCROLL,
@@ -50,23 +49,4 @@ export default function Ingredients ({items, refsTabs}:Tingredients) {
         </div>
     )
 } 
-// Ingredients.propTypes = {
-//     items: PropTypes.arrayOf(
-//         PropTypes.shape({
-//             category: PropTypes.string,
-//             items: PropTypes.arrayOf(PropTypes.shape({
-//                 _id: PropTypes.string.isRequired,
-//                 name: PropTypes.string.isRequired,
-//                 type: PropTypes.string.isRequired,
-//                 proteins: PropTypes.number.isRequired,
-//                 fat: PropTypes.number.isRequired,
-//                 carbohydrates: PropTypes.number.isRequired,
-//                 calories: PropTypes.number.isRequired,
-//                 price: PropTypes.number.isRequired,
-//                 image: PropTypes.string.isRequired,
-//                 image_mobile: PropTypes.string.isRequired,
-//                 image_large: PropTypes.string.isRequired,
-//                 __v: PropTypes.number,
-//             }).isRequired) 
-//         })
-//     )}
+

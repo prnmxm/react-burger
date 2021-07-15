@@ -48,7 +48,7 @@ export default function OrderFeedItem ({path, id, data}:TOrderFeedItem) {
                     })}
                     {itemsOther.length !== 0 ? (
                         <div className={`${styles.item}`} style={{left: left - 15}} >
-                        <img className={`${styles.item_opac}`} src={itemsOther[0].image}/>
+                        <img className={`${styles.item_opac}`} src={itemsOther[0] && itemsOther[0].image || ''}/>
                         <div className={`${styles.placeHolder} text text_type_digits-default`}>{itemsOther.length}</div>
                         </div>
                     ) : ""}
