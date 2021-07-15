@@ -60,7 +60,7 @@ function IngredientDetails() {
                     </span>
                 </div>
             </div>
-        </div> || ''
+        </div> || null
     )
 }
 

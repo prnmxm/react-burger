@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from '../../hooks';
 
 const modalRoot = document.querySelector('#modal');
 type TModalProps = {
-    children: React.ReactNode;
+    children?: React.ReactNode;
     close?: () => void;
 } 
 function Modal(props:TModalProps) {
@@ -52,6 +52,6 @@ function Modal(props:TModalProps) {
             </>
         ),
         modalRoot
-    ): ''
+    ): null
 }
 export default Modal;

@@ -276,7 +276,7 @@ export const logoutUser:AppThunk = (value) => (dispatch:AppDispatch) => {
         });
     })
 }
-export const loginUser:AppThunk = ({value, path}) => (dispatch:AppDispatch) => {
+export const loginUser:AppThunk = ({value, path}:{value: any, path: string}) => (dispatch:AppDispatch) => {
     dispatch({
         type: LOGOUT_REQUEST,
     });

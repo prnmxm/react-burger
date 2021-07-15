@@ -1,5 +1,5 @@
 import { OrderDetails } from "../../components/order-details"
-import { AppDispatch, AppThunk } from '../../types';
+import { AppDispatch, AppThunk, TIngredient } from '../../types';
 import { INGREDIENTS_SELECTED_CLEAR } from "./ingredients"
 import { OPEN_MODAL } from "./modal"
 import { getCookie } from '../../utils/fn'
@@ -20,7 +20,7 @@ export type TOrderAction =
   | IGETORDERREQUEST
   | IGETORDERSUCCES
   | GETORDERFAILED;
-export const getOrder = (ingredients:AppThunk) => (dispatch:AppDispatch) => {
+export const getOrder:AppThunk = (ingredients:Array<TIngredient>) => (dispatch:AppDispatch) => {
     dispatch({
         type: GET_ORDER_REQUEST
     })
